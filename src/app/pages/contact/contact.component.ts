@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import emailjs from '@emailjs/browser';
 
 interface ContactForm {
   name: string;
@@ -18,6 +19,11 @@ interface ContactForm {
 })
 export class ContactComponent {
   
+  // Configuración de EmailJS - REEMPLAZA CON TUS DATOS REALES
+  private readonly EMAIL_SERVICE_ID = 'service_camilosilva';
+  private readonly EMAIL_TEMPLATE_ID = 'template_camilosilva';
+  private readonly EMAIL_PUBLIC_KEY = 'j8siC2ehI1b2ZOOD3';
+
   contactForm: ContactForm = {
     name: '',
     email: '',
@@ -27,22 +33,49 @@ export class ContactComponent {
 
   isFormSubmitting = false;
   formSubmitted = false;
+  errorMessage = '';
+
+  constructor() {
+    // Inicializar EmailJS
+    emailjs.init(this.EMAIL_PUBLIC_KEY);
+  }
 
   // Enlaces de redes sociales
   socialLinks = {
     linkedin: 'https://linkedin.com/in/camilosilva-id',
     whatsapp: 'https://wa.me/5491138824544',
     github: 'https://github.com/camilo-silva',
-    email: 'mailto:camilo.silva@example.com'
+    email: 'mailto:camilosilva.0301@outlook.com'
   };
 
-  onSubmit(): void {
-    if (this.isFormValid()) {
-      this.isFormSubmitting = true;
+  async onSubmit(): Promise<void> {
+    if (!this.isFormValid()) {
+      this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      return;
+    }
 
-      // Simular envío del formulario
+    this.isFormSubmitting = true;
+    this.errorMessage = '';
+
+    try {
+      // Preparar los datos para el template de EmailJS
+      const templateParams = {
+        from_name: this.contactForm.name,
+        from_email: this.contactForm.email,
+        subject: this.contactForm.subject,
+        message: this.contactForm.message,
+        reply_to: this.contactForm.email
+      };
+
+      // Enviar email usando EmailJS
+      const response = await emailjs.send(
+        this.EMAIL_SERVICE_ID,
+        this.EMAIL_TEMPLATE_ID,
+        templateParams
+      );
+      
+      // Simular delay para UX
       setTimeout(() => {
-        console.log('Formulario enviado:', this.contactForm);
         this.isFormSubmitting = false;
         this.formSubmitted = true;
         this.resetForm();
@@ -51,7 +84,26 @@ export class ContactComponent {
         setTimeout(() => {
           this.formSubmitted = false;
         }, 5000);
-      }, 2000);
+      }, 1000);
+
+    } catch (error: any) {
+      this.isFormSubmitting = false;
+      
+      // Mensajes de error más específicos
+      if (error?.status === 400) {
+        this.errorMessage = 'Error de configuración. Verifica las credenciales de EmailJS.';
+      } else if (error?.status === 401) {
+        this.errorMessage = 'Error de autenticación. Verifica tu Public Key.';
+      } else if (error?.status === 404) {
+        this.errorMessage = 'Servicio o template no encontrado. Verifica los IDs.';
+      } else {
+        this.errorMessage = `Error al enviar: ${error?.message || 'Error desconocido'}. Intenta nuevamente o contáctame por WhatsApp.`;
+      }
+      
+      // Resetear mensaje de error después de 10 segundos para errores técnicos
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 10000);
     }
   }
 
