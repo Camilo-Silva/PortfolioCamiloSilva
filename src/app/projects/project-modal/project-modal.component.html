@@ -1,0 +1,88 @@
+<div class="modal-overlay" [class.open]="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="project">
+    <!-- Header del modal -->
+    <header class="modal-header">
+      <h2 class="modal-title">{{ project.nombre }}</h2>
+      <button class="close-button" (click)="onClose()" aria-label="Cerrar modal">
+        ✕
+      </button>
+    </header>
+
+    <!-- Contenido del modal -->
+    <div class="modal-body">
+      <!-- Descripción -->
+      <div class="project-description">
+        <p>{{ project.descripcion }}</p>
+      </div>
+
+      <!-- Galería de imágenes -->
+      <div class="image-gallery">
+        <div class="gallery-container">
+          <div 
+            *ngFor="let imagen of project.imagenes; let i = index"
+            class="gallery-slide"
+            [class.active]="i === currentImageIndex">
+            <img [src]="imagen" [alt]="project.nombre + ' - Imagen ' + (i + 1)" />
+          </div>
+        </div>
+        
+        <!-- Controles de navegación -->
+        <div class="gallery-controls" *ngIf="project.imagenes.length > 1">
+          <button 
+            class="gallery-btn prev" 
+            (click)="previousImage()"
+            aria-label="Imagen anterior">
+            ‹
+          </button>
+          <button 
+            class="gallery-btn next" 
+            (click)="nextImage()"
+            aria-label="Siguiente imagen">
+            ›
+          </button>
+        </div>
+
+        <!-- Indicadores -->
+        <div class="gallery-indicators" *ngIf="project.imagenes.length > 1">
+          <button
+            *ngFor="let imagen of project.imagenes; let i = index"
+            class="indicator"
+            [class.active]="i === currentImageIndex"
+            (click)="goToImage(i)"
+            [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+          </button>
+        </div>
+      </div>
+
+      <!-- Tecnologías -->
+      <div class="technologies-section">
+        <h3>Tecnologías utilizadas</h3>
+        <div class="technologies-grid">
+          <span 
+            *ngFor="let tech of project.tecnologias" 
+            class="tech-badge">
+            {{ tech }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="action-buttons">
+        <a 
+          [href]="project.githubUrl" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline">
+          Ver en GitHub
+        </a>
+        <a 
+          [href]="project.hostedUrl" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-primary">
+          Ver Proyecto Hosteado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

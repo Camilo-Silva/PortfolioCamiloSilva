@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="header-container">
+    <!-- Logo -->
+    <app-logo></app-logo>
+    
+    <!-- Right side controls -->
+    <div class="header-controls">
+      <!-- Theme toggle -->
+      <button 
+        class="theme-toggle" 
+        (click)="toggleTheme()"
+        [attr.aria-label]="'Cambiar a tema ' + (isDarkTheme ? 'claro' : 'oscuro')"
+        title="Cambiar tema">
+        <span class="theme-icon" [class.dark]="isDarkTheme">
+          {{ isDarkTheme ? '☀️' : '🌙' }}
+        </span>
+      </button>
+      
+      <!-- Menu toggle -->
+      <app-navbar-toggle 
+        [isMenuOpen]="isMenuOpen"
+        (menuToggle)="toggleMenu()">
+      </app-navbar-toggle>
+    </div>
+  </div>
+  
+  <!-- Menu overlay -->
+  <app-menu-overlay 
+    [isOpen]="isMenuOpen"
+    (closeMenu)="closeMenu()">
+  </app-menu-overlay>
+</header>

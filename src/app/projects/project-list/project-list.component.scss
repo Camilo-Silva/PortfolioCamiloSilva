@@ -1,0 +1,130 @@
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  max-width: 600px;
+}
+
+.project-item {
+  background-color: var(--secondary-bg);
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  padding: var(--spacing-xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.05), transparent);
+    transition: left var(--transition-slow);
+  }
+
+  &:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+
+    &::before {
+      left: 100%;
+    }
+
+    .project-button {
+      background-color: var(--accent-color);
+      color: white;
+      transform: translateX(5px);
+    }
+  }
+
+  .project-info {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .project-name {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .project-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .tech-badge {
+    background-color: var(--accent-color);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 1rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  .project-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .project-button {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-base);
+
+    &:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .project-list {
+    gap: var(--spacing-lg);
+  }
+
+  .project-item {
+    padding: var(--spacing-lg);
+
+    .project-name {
+      font-size: var(--font-size-lg);
+    }
+
+    .project-technologies {
+      gap: var(--spacing-xs);
+    }
+
+    .tech-badge {
+      font-size: 0.75rem;
+      padding: var(--spacing-xs);
+    }
+
+    .project-actions {
+      justify-content: center;
+      margin-top: var(--spacing-md);
+    }
+
+    .project-button {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+}

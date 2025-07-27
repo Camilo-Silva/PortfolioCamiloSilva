@@ -1,0 +1,28 @@
+<div class="project-list">
+  <div 
+    *ngFor="let project of projects; trackBy: trackByProjectId"
+    class="project-item"
+    (mouseenter)="onProjectHover(project)"
+    (mouseleave)="onProjectLeave()"
+    (click)="onProjectClick(project)">
+    
+    <div class="project-info">
+      <h3 class="project-name">{{ project.nombre }}</h3>
+      <p class="project-description">{{ project.descripcion }}</p>
+      
+      <div class="project-technologies">
+        <span 
+          *ngFor="let tech of project.tecnologias" 
+          class="tech-badge">
+          {{ tech }}
+        </span>
+      </div>
+    </div>
+    
+    <div class="project-actions">
+      <button class="project-button">
+        Ver Detalles
+      </button>
+    </div>
+  </div>
+</div>
