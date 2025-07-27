@@ -19,7 +19,11 @@
     .section-title {
       font-size: 3rem;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+      );
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -61,7 +65,7 @@
       font-size: 2rem;
       margin-bottom: 1rem;
       color: var(--primary-color);
-      
+
       @media (max-width: 768px) {
         font-size: 1.5rem;
       }
@@ -105,7 +109,7 @@
 
         &.linkedin {
           background: linear-gradient(135deg, #0077b5, #005885);
-          
+
           &:hover {
             box-shadow: 0 8px 25px rgba(0, 119, 181, 0.3);
           }
@@ -113,7 +117,7 @@
 
         &.whatsapp {
           background: linear-gradient(135deg, #25d366, #128c7e);
-          
+
           &:hover {
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
           }
@@ -121,7 +125,7 @@
 
         &.github {
           background: linear-gradient(135deg, #333, #24292e);
-          
+
           &:hover {
             box-shadow: 0 8px 25px rgba(51, 51, 51, 0.3);
           }
@@ -129,7 +133,7 @@
 
         &.email {
           background: linear-gradient(135deg, #ea4335, #d33b2c);
-          
+
           &:hover {
             box-shadow: 0 8px 25px rgba(234, 67, 53, 0.3);
           }
@@ -178,7 +182,7 @@
       font-size: 2rem;
       margin-bottom: 1.5rem;
       color: var(--primary-color);
-      
+
       @media (max-width: 768px) {
         font-size: 1.5rem;
       }
@@ -270,7 +274,11 @@
 
       .submit-btn {
         width: 100%;
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        // background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+        background-color: var(--accent-color);
+        color: var(--primary-bg);
+
         border: none;
         padding: 1rem 2rem;
         border-radius: 8px;
@@ -285,9 +293,10 @@
 
         // Color del texto según el tema
         color: black; // Por defecto negro (tema light)
-        
+
         // Asegurar que todos los spans usen el color correcto
-        span, * {
+        span,
+        * {
           color: inherit !important;
         }
 
@@ -315,7 +324,7 @@
               height: 20px;
               animation: spin 1s linear infinite;
               color: inherit !important;
-              
+
               circle {
                 stroke: currentColor !important;
               }
@@ -359,10 +368,18 @@
   animation-fill-mode: both;
 }
 
-.social-btn:nth-child(1) { animation-delay: 0.1s; }
-.social-btn:nth-child(2) { animation-delay: 0.2s; }
-.social-btn:nth-child(3) { animation-delay: 0.3s; }
-.social-btn:nth-child(4) { animation-delay: 0.4s; }
+.social-btn:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.social-btn:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.social-btn:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.social-btn:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes slideInLeft {
   from {
@@ -397,18 +414,19 @@
       .contact-form {
         .submit-btn {
           color: white;
-          
-          span, * {
+
+          span,
+          * {
             color: white !important;
           }
-          
+
           &.loading {
             .loading-text {
               color: white !important;
-              
+
               .spinner {
                 color: white !important;
-                
+
                 circle {
                   stroke: white !important;
                 }

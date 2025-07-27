@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 
 interface ContactForm {
@@ -18,6 +18,8 @@ interface ContactForm {
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  
+  @ViewChild('contactFormRef') contactFormRef!: NgForm;
   
   // Configuración de EmailJS - REEMPLAZA CON TUS DATOS REALES
   private readonly EMAIL_SERVICE_ID = 'service_camilosilva';
@@ -129,6 +131,11 @@ export class ContactComponent {
       subject: '',
       message: ''
     };
+    
+    // Resetear el estado de validación del formulario
+    if (this.contactFormRef) {
+      this.contactFormRef.resetForm();
+    }
   }
 
   openWhatsApp(): void {
