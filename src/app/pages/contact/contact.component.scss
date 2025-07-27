@@ -3,6 +3,10 @@
   margin: 0 auto;
   padding: 2rem;
   color: var(--text-color);
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 
   @media (max-width: 768px) {
     padding: 1rem;

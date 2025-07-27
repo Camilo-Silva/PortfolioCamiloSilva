@@ -1,6 +1,11 @@
 <a routerLink="/" class="logo" [attr.aria-label]="'Ir al inicio - ' + title">
   <div class="logo-container">
-    <span class="logo-text">CS</span>
+    <img 
+      [src]="logoPath" 
+      [alt]="title"
+      class="logo-image"
+      loading="lazy"
+    />
   </div>
   <span class="sr-only">{{ title }}</span>
 </a>

@@ -1,7 +1,7 @@
 .projects {
   min-height: 100vh;
   padding: var(--spacing-2xl) 0;
-  background-color: var(--primary-bg);
+  background-color: transparent;
 
   .projects-header {
     text-align: center;
@@ -42,7 +42,7 @@
       height: 400px;
       border-radius: 1rem;
       overflow: hidden;
-      background-color: var(--secondary-bg);
+      background-color: transparent;
       opacity: 0;
       transform: scale(0.95);
       transition: all var(--transition-base);

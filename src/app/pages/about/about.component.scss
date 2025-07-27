@@ -3,6 +3,10 @@
   margin: 0 auto;
   padding: 2rem;
   color: var(--text-color);
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -60,7 +64,7 @@
 
       h3 {
         margin-bottom: 1rem;
-        color: var(--primary-color);
+        color: var(--text-primary);
       }
 
       p {
@@ -71,7 +75,60 @@
 
         strong {
           min-width: 120px;
-          color: var(--secondary-color);
+          color: var(--text-secondary);
+        }
+      }
+    }
+
+    .cv-section {
+      background: var(--primary-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        text-align: center;
+      }
+
+      .cv-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        .cv-thumbnail {
+          width: 80px;
+          height: 100px;
+          background: var(--background-color);          
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 8px;
+          font-size: 1.2rem;
+          font-weight: 600;
+          box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+        }
+
+        .cv-actions {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          @media (max-width: 480px) {
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .btn {
+            min-width: 120px;
+            
+            @media (max-width: 480px) {
+              width: 100%;
+            }
+          }
         }
       }
     }
@@ -137,7 +194,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(180deg, var(--text-primary), var(--text-secondary));
     }
 
     .timeline-item {
@@ -161,7 +218,7 @@
         top: 1.5rem;
         width: 12px;
         height: 12px;
-        background: var(--primary-color);
+        background: var(--text-primary);
         border-radius: 50%;
         border: 3px solid var(--background-color);
 
@@ -204,7 +261,7 @@
 
           &::before {
             content: '▸';
-            color: var(--primary-color);
+            color: var(--secondary-color);
             position: absolute;
             left: -1rem;
           }
@@ -248,19 +305,64 @@
   }
 
   .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
 
     .skill-category {
       background: var(--card-background);
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-      h4 {
-        color: var(--primary-color);
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.15);
+      }
+
+      h3 {
+        color: var(--text-primary);
         margin-bottom: 1rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 600;
+        text-align: center;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--text-primary);
+      }
+
+      .skills-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        align-items: start;
+
+        @media (max-width: 480px) {
+          grid-template-columns: 1fr;
+        }
+
+        .skill-tag {
+          background: linear-gradient(135deg, var(--primary-bg), var(--border-color));
+          padding: 0.4rem 0.8rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-align: center;
+          transition: all 0.3s ease;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+          }
+        }
       }
 
       .skill-tags {

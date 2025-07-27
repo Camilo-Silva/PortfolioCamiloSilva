@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--primary-bg);
-  border-bottom: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
+  background-color: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
   transition: all var(--transition-base);
 
   .header-container {

@@ -5,20 +5,24 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: var(--primary-bg);
 
   .home-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: var(--spacing-2xl);
     text-align: center;
     position: relative;
     z-index: 2;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
   }
 
   .home-content {
     max-width: 800px;
     margin: 0 auto;
+    background: transparent;
   }
 
   .home-title {
@@ -68,7 +72,7 @@
     }
   }
 
-  // Elementos decorativos flotantes
+//   Elementos decorativos flotantes
   .home-decoration {
     position: absolute;
     top: 0;

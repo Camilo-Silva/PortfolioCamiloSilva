@@ -5,24 +5,33 @@
 
   &:hover {
     transform: scale(1.05);
-    color: var(--accent-color);
   }
 
   .logo-container {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: var(--shadow);
     transition: all var(--transition-base);
+    overflow: hidden;
 
     &:hover {
-      box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
       transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .logo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: all var(--transition-base);
+      
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 
