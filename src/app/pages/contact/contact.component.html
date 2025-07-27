@@ -156,11 +156,11 @@
 
           <button 
             type="submit" 
-            class="submit-btn"
+            class="btn btn-primary"
             [disabled]="contactFormRef.invalid || isFormSubmitting"
             [class.loading]="isFormSubmitting"
           >
-            <span *ngIf="!isFormSubmitting">Enviar mensaje</span>
+            <span *ngIf="!isFormSubmitting">ENVIAR MENSAJE</span>
             <span *ngIf="isFormSubmitting" class="loading-text">
               <svg class="spinner" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
@@ -168,7 +168,7 @@
                   <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
                 </circle>
               </svg>
-              Enviando...
+              ENVIANDO...
             </span>
           </button>
         </form>

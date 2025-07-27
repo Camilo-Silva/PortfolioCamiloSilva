@@ -272,41 +272,28 @@
         }
       }
 
-      .submit-btn {
+      // Botón personalizado que hereda de .btn .btn-primary global
+      .btn.btn-primary {
         width: 100%;
-        // background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-
-        background-color: var(--accent-color);
-        color: var(--primary-bg);
-
-        border: none;
         padding: 1rem 2rem;
-        border-radius: 8px;
         font-size: 1.1rem;
         font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-
-        // Color del texto según el tema
-        color: black; // Por defecto negro (tema light)
-
-        // Asegurar que todos los spans usen el color correcto
-        span,
-        * {
-          color: inherit !important;
-        }
+        border-radius: 8px;
+        min-height: 50px;
 
         &:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.3);
+          box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
         }
 
         &:disabled {
-          opacity: 0.7;
+          opacity: 0.3;
           cursor: not-allowed;
           transform: none;
           box-shadow: none;
@@ -317,16 +304,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: inherit !important;
 
             .spinner {
               width: 20px;
               height: 20px;
               animation: spin 1s linear infinite;
-              color: inherit !important;
 
               circle {
-                stroke: currentColor !important;
+                stroke: currentColor;
               }
             }
           }
@@ -407,34 +392,5 @@
   }
 }
 
-// Estilos específicos para tema dark
-:host-context([data-theme="dark"]) {
-  .contact {
-    .contact-form-section {
-      .contact-form {
-        .submit-btn {
-          color: white;
-
-          span,
-          * {
-            color: white !important;
-          }
-
-          &.loading {
-            .loading-text {
-              color: white !important;
-
-              .spinner {
-                color: white !important;
-
-                circle {
-                  stroke: white !important;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+// Estilos específicos para tema dark ya no son necesarios
+// porque ahora usa las variables CSS globales que se ajustan automáticamente
