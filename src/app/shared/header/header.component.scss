@@ -18,28 +18,11 @@
     right: 0;
     height: 100%;
     background: var(--background-image);
-    background-size: cover;
+    background-size: 100% 100vh;
     background-position: center;
     background-attachment: fixed;
     z-index: -1;
     pointer-events: none;
-  }
-
-  // Máscara adicional específica para modo light
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-color: #ffffff;
-    z-index: -2;
-    pointer-events: none;
-    
-    [data-theme="dark"] & {
-      background-color: #1a1a1a;
-    }
   }
 
   .header-container {
