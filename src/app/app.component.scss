@@ -4,6 +4,11 @@
 }
 
 .main-content {
-  min-height: calc(100vh - 80px); // Adjust based on header height
-  padding-top: 80px; // Space for fixed header
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 95px);
+    padding-top: 95px;
+  }
 }

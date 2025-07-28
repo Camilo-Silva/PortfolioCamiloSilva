@@ -11,9 +11,11 @@
         (click)="toggleTheme()"
         [attr.aria-label]="'Cambiar a tema ' + (isDarkTheme ? 'claro' : 'oscuro')"
         title="Cambiar tema">
-        <span class="theme-icon" [class.dark]="isDarkTheme">
-          {{ isDarkTheme ? '☀️' : '🌙' }}
-        </span>
+        <img 
+          class="theme-icon" 
+          [class.dark]="isDarkTheme"
+          [src]="isDarkTheme ? '/assets/images/sun.svg' : '/assets/images/moon.svg'"
+          [alt]="isDarkTheme ? 'Icono de sol' : 'Icono de luna'">
       </button>
       
       <!-- Menu toggle -->

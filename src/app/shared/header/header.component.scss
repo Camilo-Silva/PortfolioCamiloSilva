@@ -3,11 +3,44 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   background-color: transparent;
   border-bottom: none;
   backdrop-filter: none;
   transition: all var(--transition-base);
+
+  // Crear una zona de máscara para ocultar contenido que pase por debajo
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: var(--background-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  // Máscara adicional específica para modo light
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: -2;
+    pointer-events: none;
+    
+    [data-theme="dark"] & {
+      background-color: #1a1a1a;
+    }
+  }
 
   .header-container {
     max-width: 1200px;
@@ -55,17 +88,22 @@
 
 @media (max-width: 768px) {
   .header {
+    &::before,
+    &::after {
+      height: 95px; // Altura específica para mobile
+    }
+
     .header-container {
       padding: 0 var(--spacing-md);
-      height: 70px;
+      height: 95px;
     }
 
     .theme-toggle {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       
       .theme-icon {
-        font-size: 1rem;
+        font-size: 1.6rem;
       }
     }
   }

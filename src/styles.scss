@@ -33,6 +33,10 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   
+  // Header heights
+  --header-height: 80px;
+  --header-height-mobile: 90px;
+  
   // Transitions
   --transition-fast: 0.15s ease-in-out;
   --transition-base: 0.3s ease-in-out;
@@ -197,6 +201,19 @@ a {
 .page-container,
 .section-container {
   @extend .minimalist-container;
+}
+
+// Page spacing to avoid header overlap
+app-home,
+app-about,
+app-projects,
+app-contact {
+  display: block;
+  padding-top: var(--header-height);
+  
+  @media (max-width: 768px) {
+    padding-top: var(--header-height-mobile);
+  }
 }
 
 // Responsive breakpoints

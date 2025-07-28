@@ -35,6 +35,10 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     
     .highlight {
       background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
@@ -143,6 +147,9 @@
       font-size: clamp(1.2rem, 8vw, 2.8rem);
       margin-bottom: var(--spacing-md);
       letter-spacing: 1px;
+      white-space: normal;
+      text-align: center;
+      display: block;
     }
 
     .home-description {
@@ -192,6 +199,9 @@
     .home-title {
       font-size: clamp(1rem, 10vw, 2.2rem);
       letter-spacing: 0.5px;
+      white-space: normal;
+      text-align: center;
+      display: block;
     }
 
     .home-description {
