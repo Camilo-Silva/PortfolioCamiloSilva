@@ -16,9 +16,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100%;
-    background: var(--background-image);
-    background-size: 100% 100vh;
+    height: var(--header-height); // Usar la variable CSS
+    background: var(--primary-bg); // Color sólido como respaldo
+    background-image: var(--background-image);
+    background-size: 100% 100%;
     background-position: center;
     background-attachment: fixed;
     z-index: -1;
@@ -29,7 +30,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-lg);
-    height: 80px;
+    height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -71,14 +72,13 @@
 
 @media (max-width: 768px) {
   .header {
-    &::before,
-    &::after {
-      height: 95px; // Altura específica para mobile
+    &::before {
+      height: var(--header-height-mobile); // Usar la variable CSS
     }
 
     .header-container {
       padding: 0 var(--spacing-md);
-      height: 95px;
+      height: var(--header-height-mobile);
     }
 
     .theme-toggle {
