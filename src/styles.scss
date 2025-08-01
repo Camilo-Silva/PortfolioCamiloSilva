@@ -225,7 +225,7 @@ app-contact {
 .about,
 .projects,
 .contact {
-  min-height: 100vh;
+  min-height: auto;
   padding: var(--spacing-2xl) 0;
   background-color: transparent;
   position: relative;

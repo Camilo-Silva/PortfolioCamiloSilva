@@ -1,9 +1,13 @@
 .home {
-  // Las reglas base ya están definidas en styles.scss globalmente
-  overflow-y: hidden; // Eliminar scroll específicamente para home
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ 
+  // Todas las reglas están definidas en styles.scss globalmente
+  // No necesitamos sobrescribir aquí para evitar conflictos
+
+  .home-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    // Header vacío pero con el mismo espaciado que las otras páginas
+  }
 
   .home-content {
     text-align: center;
@@ -12,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh; // Usar 70vh para centrado vertical
+    min-height: 70vh; // Usar 80vh para centrado vertical
   }
 
   .home-title {
@@ -24,10 +28,7 @@
     color: var(--text-primary);
     text-transform: uppercase;
     letter-spacing: 2px;
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     width: 100%;
     
     .highlight {
