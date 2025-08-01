@@ -1,14 +1,13 @@
 :host {
   display: block;
-  min-height: 100vh;
+  height: 100vh; // Altura fija en lugar de min-height
+  overflow: hidden; // Sin scroll en el host
 }
 
 .main-content {
-  min-height: calc(100vh - 80px);
-  padding-top: 80px;
-
-  @media (max-width: 768px) {
-    min-height: calc(100vh - 95px);
-    padding-top: 95px;
-  }
+  height: 100vh; // Altura fija
+  overflow: hidden; // Sin scroll en main-content
+  padding-top: 0; // Sin padding superior
+  
+  // El header será posicionado como overlay, no necesitamos padding
 }

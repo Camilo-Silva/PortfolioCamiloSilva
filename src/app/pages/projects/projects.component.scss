@@ -1,6 +1,6 @@
 .projects {
   min-height: 100vh; // Usa mínimo el 100% del 80vh disponible, puede expandirse
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2); // Padding inferior doble para más espacio
   background-color: transparent;
   position: relative; // Configuración estándar para todas las páginas
 
@@ -35,6 +35,7 @@
 
     .projects-list {
       position: relative;
+      padding-bottom: var(--spacing-2xl); // Espacio adicional después del último proyecto
     }
 
     .project-preview {
@@ -89,7 +90,7 @@
 
 @media (max-width: 768px) {
   .projects {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-xl) 0 calc(var(--spacing-xl) * 2); // Mantener padding inferior extra en móviles
 
     .projects-header {
       margin-bottom: var(--spacing-xl);
@@ -102,6 +103,10 @@
     .projects-content {
       .project-preview {
         height: 250px;
+      }
+
+      .projects-list {
+        padding-bottom: var(--spacing-xl); // Espacio adicional en móviles también
       }
     }
   }

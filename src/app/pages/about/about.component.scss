@@ -1,6 +1,6 @@
 .about {
   min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2); // Padding inferior doble para más espacio
   background-color: transparent;
   position: relative; // Configuración estándar para todas las páginas
 
@@ -415,6 +415,57 @@
         &:hover {
           transform: translateY(-2px);
           box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.2);
+        }
+      }
+    }
+  }
+
+  // Estilos específicos para la sección de habilidades profesionales
+  .soft-skills-section {
+    margin-bottom: var(--spacing-2xl); // Espacio extra después de la última sección
+    padding-bottom: var(--spacing-2xl); // Padding inferior adicional
+
+    h2 {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+      color: var(--text-primary);
+    }
+
+    .soft-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+
+      .soft-skill-item {
+        background: rgba(var(--accent-color), 0.05);
+        border: 1px solid rgba(var(--accent-color), 0.1);
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        text-align: center;
+        transition: all var(--transition-base);
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(var(--accent-color), 0.15);
+          border-color: rgba(var(--accent-color), 0.3);
+        }
+
+        h3 {
+          color: var(--accent-color);
+          margin-bottom: var(--spacing-sm);
+          font-size: var(--font-size-lg);
+          font-weight: 600;
+        }
+
+        p {
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin-bottom: 0;
         }
       }
     }

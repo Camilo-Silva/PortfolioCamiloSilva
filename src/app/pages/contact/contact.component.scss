@@ -1,6 +1,6 @@
 .contact {
   min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2); // Padding inferior doble para más espacio
   background-color: transparent;
   position: relative; // Configuración estándar para todas las páginas
 
@@ -158,6 +158,8 @@
 
   // Formulario de contacto
   .contact-form-section {
+    padding-bottom: var(--spacing-2xl); // Espacio extra después del formulario
+    
     h2 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
@@ -188,7 +190,7 @@
 
     .contact-form {
       background: var(--card-background);
-      // padding: 2rem;
+      padding: 0rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
@@ -357,16 +359,38 @@
   }
 }
 
+// Responsive para tablets
+@media (max-width: 768px) {
+  .contact {
+    .contact-form-section {
+      padding-bottom: calc(var(--spacing-2xl) * 1.5); // Padding intermedio para tablets
+    }
+  }
+}
+
 // Responsive mejoras
 @media (max-width: 480px) {
   :host {
     .contact {
+      // Aumentar padding inferior en móviles para más espacio
+      padding-bottom: calc(var(--spacing-2xl) * 3); // Triple padding en móviles
+      
       .social-links {
         grid-template-columns: 1fr;
       }
 
-      .contact-form-section .contact-form {
-        padding: 1rem;
+      .contact-form-section {
+        padding-bottom: calc(var(--spacing-2xl) * 2); // Doble padding en móviles
+        
+        .contact-form {
+          padding: 1rem;
+          margin-bottom: var(--spacing-xl); // Espacio extra después del formulario en móviles
+          
+          // Espacio extra para el botón en móviles
+          .btn.btn-primary {
+            margin-bottom: var(--spacing-lg); // Espacio extra debajo del botón
+          }
+        }
       }
     }
   }

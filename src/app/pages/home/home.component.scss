@@ -1,22 +1,30 @@
 .home {
- 
+  // Usar el sistema de scroll interno oculto como las otras páginas
+  // pero con contenido centrado
+  padding: 0; // Sin padding superior e inferior para centrado perfecto
+  display: flex;
+  flex-direction: column;
+  
   // Todas las reglas están definidas en styles.scss globalmente
   // No necesitamos sobrescribir aquí para evitar conflictos
 
   .home-header {
     text-align: center;
-    margin-bottom: var(--spacing-2xl);
-    // Header vacío pero con el mismo espaciado que las otras páginas
+    margin-bottom: 0; // Sin margin para no afectar el centrado
+    height: 0; // No ocupa altura visual
+    // Header vacío pero mantiene la estructura
   }
 
   .home-content {
     text-align: center;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: 0; // Sin margin para mantener centrado
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh; // Usar 80vh para centrado vertical
+    flex: 1; // Ocupa todo el espacio disponible
+    min-height: 90vh; // Altura mínima del espacio disponible (90vh)
+    padding: var(--spacing-lg); // Padding uniforme
   }
 
   .home-title {
@@ -130,6 +138,10 @@
 // Responsive design
 @media (max-width: 768px) {
   .home {
+    .home-content {
+      min-height: 90vh; // Mantener altura del sistema 90/10
+      padding: var(--spacing-md); // Padding uniforme
+    }
 
     .home-title {
       font-size: clamp(1.2rem, 8vw, 2.8rem);
@@ -184,6 +196,11 @@
 
 @media (max-width: 480px) {
   .home {
+    .home-content {
+      min-height: 90vh; // Mantener altura del sistema 90/10
+      padding: var(--spacing-sm); // Padding mínimo
+    }
+
     .home-title {
       font-size: clamp(1rem, 10vw, 2.2rem);
       letter-spacing: 0.5px;
