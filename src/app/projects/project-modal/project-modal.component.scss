@@ -42,9 +42,18 @@
   width: 100%;
   max-height: calc(100vh - var(--header-height) - var(--spacing-xl)); // Ajustar altura considerando header
   overflow-y: auto;
+  overflow-x: hidden; // Evitar scroll horizontal
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   transform: scale(0.9) translateY(20px);
   transition: transform var(--transition-base);
+  
+  // Asegurar scroll suave y ocultar barras de scroll
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // Internet Explorer 10+
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
 
   // Ajuste para mobile
   @media (max-width: 768px) {
@@ -89,6 +98,7 @@
 
 .modal-body {
   padding: var(--spacing-xl);
+  padding-bottom: calc(var(--spacing-xl) * 2); // Padding inferior doble para asegurar visibilidad completa
 }
 
 .project-description {
@@ -255,6 +265,7 @@
 
   .modal-body {
     padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) * 3); // Triple padding inferior en tablets para mejor scroll
   }
 
   .image-gallery {
@@ -284,6 +295,7 @@
   .modal-overlay {
     padding: var(--spacing-sm);
     padding-top: calc(var(--header-height-mobile) + var(--spacing-sm)); // Reducir padding en pantallas muy pequeñas
+    padding-bottom: var(--spacing-lg); // Agregar padding inferior en móviles
   }
 
   .modal-content {
@@ -296,6 +308,11 @@
     }
   }
 
+  .modal-body {
+    padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) * 4); // Cuádruple padding inferior en móviles para asegurar scroll completo
+  }
+
   .image-gallery {
     .gallery-container {
       height: 200px;
@@ -306,6 +323,14 @@
     .tech-badge {
       font-size: 0.75rem;
       padding: var(--spacing-xs);
+    }
+  }
+
+  .action-buttons {
+    margin-bottom: var(--spacing-lg); // Espacio extra después de los botones en móviles
+    
+    .btn {
+      padding: var(--spacing-md) var(--spacing-lg); // Más padding en botones para móviles
     }
   }
 }
