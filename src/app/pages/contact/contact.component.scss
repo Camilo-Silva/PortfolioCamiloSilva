@@ -1,49 +1,29 @@
 .contact {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: var(--text-color);
-  background: transparent;
-  backdrop-filter: none;
-  border: none;
-  box-shadow: none;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
+  min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
+  padding: var(--spacing-2xl) 0;
+  background-color: transparent;
+  position: relative; // Configuración estándar para todas las páginas
 
   .contact-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: var(--spacing-2xl);
 
     .section-title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(
-        135deg,
-        var(--primary-color),
-        var(--secondary-color)
-      );
-      background-clip: text;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: var(--spacing-lg);
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 700;
-
-      @media (max-width: 768px) {
-        font-size: 2.5rem;
-      }
+      background-clip: text;
     }
 
-    .section-subtitle {
-      font-size: 1.2rem;
-      color: var(--text-color);
-      opacity: 0.8;
+    .section-description {
+      font-size: var(--font-size-lg);
+      color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
-
-      @media (max-width: 768px) {
-        font-size: 1rem;
-      }
+      line-height: 1.6;
     }
   }
 
@@ -208,7 +188,7 @@
 
     .contact-form {
       background: var(--card-background);
-      padding: 2rem;
+      // padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 

@@ -1,7 +1,8 @@
 .projects {
-  min-height: 100vh;
+  min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
   padding: var(--spacing-2xl) 0;
   background-color: transparent;
+  position: relative; // Configuración estándar para todas las páginas
 
   .projects-header {
     text-align: center;

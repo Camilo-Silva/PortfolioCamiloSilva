@@ -37,6 +37,10 @@
   --header-height: 80px;
   --header-height-mobile: 90px;
   
+  // Layout percentages - header 20%, content 80%
+  --header-height-percent: 20vh;
+  --content-height-percent: 80vh;
+  
   // Transitions
   --transition-fast: 0.15s ease-in-out;
   --transition-base: 0.3s ease-in-out;
@@ -204,16 +208,29 @@ a {
 }
 
 // Page spacing to avoid header overlap
+// Sistema unificado para alineación perfecta de headers en todas las páginas
 app-home,
 app-about,
 app-projects,
 app-contact {
   display: block;
-  padding-top: var(--header-height);
-  
-  @media (max-width: 768px) {
-    padding-top: var(--header-height-mobile);
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+// Configuración estándar para todos los contenedores principales
+.home,
+.about,
+.projects,
+.contact {
+  min-height: 100vh;
+  padding: var(--spacing-2xl) 0;
+  background-color: transparent;
+  position: relative;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 // Responsive breakpoints

@@ -8,12 +8,13 @@
   backdrop-filter: blur(5px);
   z-index: 1000;
   display: flex;
-  align-items: center;
+  align-items: flex-start; // Cambiar de center a flex-start
   justify-content: center;
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
   padding: var(--spacing-lg);
+  padding-top: calc(var(--header-height) + var(--spacing-lg)); // Agregar espacio para el header
 
   &.open {
     opacity: 1;
@@ -22,6 +23,11 @@
     .modal-content {
       transform: scale(1) translateY(0);
     }
+  }
+
+  // Ajuste para mobile
+  @media (max-width: 768px) {
+    padding-top: calc(var(--header-height-mobile) + var(--spacing-md));
   }
 }
 
@@ -34,11 +40,16 @@
   border-radius: 1rem;
   max-width: 800px;
   width: 100%;
-  max-height: 90vh;
+  max-height: calc(100vh - var(--header-height) - var(--spacing-xl)); // Ajustar altura considerando header
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   transform: scale(0.9) translateY(20px);
   transition: transform var(--transition-base);
+
+  // Ajuste para mobile
+  @media (max-width: 768px) {
+    max-height: calc(100vh - var(--header-height-mobile) - var(--spacing-lg));
+  }
 }
 
 .modal-header {
@@ -227,10 +238,11 @@
 @media (max-width: 768px) {
   .modal-overlay {
     padding: var(--spacing-md);
+    padding-top: calc(var(--header-height-mobile) + var(--spacing-md)); // Mantener el espacio del header
   }
 
   .modal-content {
-    max-height: 95vh;
+    max-height: calc(100vh - var(--header-height-mobile) - var(--spacing-lg)); // Usar la altura calculada correcta
   }
 
   .modal-header {
@@ -269,6 +281,15 @@
 }
 
 @media (max-width: 480px) {
+  .modal-overlay {
+    padding: var(--spacing-sm);
+    padding-top: calc(var(--header-height-mobile) + var(--spacing-sm)); // Reducir padding en pantallas muy pequeñas
+  }
+
+  .modal-content {
+    max-height: calc(100vh - var(--header-height-mobile) - var(--spacing-md)); // Optimizar para pantallas pequeñas
+  }
+
   .modal-header {
     .modal-title {
       font-size: var(--font-size-lg);
