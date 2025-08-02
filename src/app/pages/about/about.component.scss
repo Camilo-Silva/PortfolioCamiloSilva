@@ -139,9 +139,57 @@
 
           .btn {
             min-width: 120px;
+            position: relative;
+            transition: all var(--transition-base);
+            
+            &:disabled {
+              opacity: 0.7;
+              cursor: not-allowed;
+              pointer-events: none;
+            }
+            
+            &.loading {
+              background-color: var(--border-color);
+              color: var(--text-secondary);
+              cursor: wait;
+              
+              span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+              }
+            }
             
             @media (max-width: 480px) {
               width: 100%;
+            }
+          }
+        }
+
+        // Mensaje de feedback para descargas
+        .download-feedback {
+          margin-top: var(--spacing-md);
+          text-align: center;
+          
+          p {
+            margin: 0;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all var(--transition-base);
+            
+            &.success {
+              background-color: rgba(34, 197, 94, 0.1);
+              color: #16a34a;
+              border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+            
+            &.error {
+              background-color: rgba(239, 68, 68, 0.1);
+              color: #dc2626;
+              border: 1px solid rgba(239, 68, 68, 0.3);
             }
           }
         }

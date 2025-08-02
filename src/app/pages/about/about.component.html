@@ -30,12 +30,28 @@
               <p>CV</p>
             </div>
             <div class="cv-actions">
-              <button class="btn btn-primary" (click)="downloadCV('pdf')">
-                Descargar PDF
+              <button 
+                class="btn btn-primary" 
+                (click)="downloadCV('pdf')"
+                [disabled]="isDownloading"
+                [class.loading]="isDownloading">
+                <span *ngIf="!isDownloading">📄 Descargar PDF</span>
+                <span *ngIf="isDownloading">⏳ Descargando...</span>
               </button>
-              <button class="btn btn-outline" (click)="downloadCV('jpg')">
-                Descargar JPG
+              <button 
+                class="btn btn-outline" 
+                (click)="downloadCV('jpg')"
+                [disabled]="isDownloading"
+                [class.loading]="isDownloading">
+                <span *ngIf="!isDownloading">🖼️ Descargar JPG</span>
+                <span *ngIf="isDownloading">⏳ Descargando...</span>
               </button>
+            </div>
+            <!-- Mensaje de feedback -->
+            <div class="download-feedback" *ngIf="downloadMessage">
+              <p [ngClass]="{'success': downloadMessage.includes('✅'), 'error': downloadMessage.includes('❌')}">
+                {{ downloadMessage }}
+              </p>
             </div>
           </div>
         </div>
