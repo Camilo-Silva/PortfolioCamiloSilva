@@ -22,7 +22,11 @@
       font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 700;
       margin-bottom: var(--spacing-lg);
-      background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+      background: linear-gradient(
+        135deg,
+        var(--accent-color),
+        var(--accent-hover)
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -41,7 +45,11 @@
     font-size: 3rem;
     margin-bottom: 2rem;
     text-align: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -55,14 +63,14 @@
 
   .section {
     margin-bottom: 3rem;
-    
+
     h2 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
       color: var(--primary-color);
       border-bottom: 2px solid var(--primary-color);
       padding-bottom: 0.5rem;
-      
+
       @media (max-width: 768px) {
         font-size: 1.5rem;
         margin-bottom: 1rem;
@@ -107,13 +115,13 @@
       }
     }
 
-    .cv-section {      
+    .cv-section {
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       justify-self: right; // Alineado al margen derecho
-      width: 100%; // Usar todo el ancho disponible de su columna        
-      
+      width: 100%; // Usar todo el ancho disponible de su columna
+
       h3 {
         margin-bottom: 1rem;
         color: var(--text-primary);
@@ -129,7 +137,7 @@
         .cv-thumbnail {
           width: 80px;
           height: 100px;
-          background: var(--background-color);          
+          background: var(--background-color);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -143,7 +151,7 @@
           display: flex;
           gap: 1rem;
           flex-wrap: wrap;
-          justify-content: flex-end; 
+          justify-content: flex-end;
 
           @media (max-width: 480px) {
             flex-direction: column;
@@ -154,18 +162,18 @@
             min-width: 120px;
             position: relative;
             transition: all var(--transition-base);
-            
+
             &:disabled {
               opacity: 0.7;
               cursor: not-allowed;
               pointer-events: none;
             }
-            
+
             &.loading {
               background-color: var(--border-color);
               color: var(--text-secondary);
               cursor: wait;
-              
+
               span {
                 display: flex;
                 align-items: center;
@@ -173,7 +181,7 @@
                 gap: 0.5rem;
               }
             }
-            
+
             @media (max-width: 480px) {
               width: 100%;
             }
@@ -192,13 +200,13 @@
             font-weight: 500;
             font-size: 0.9rem;
             transition: all var(--transition-base);
-            
+
             &.success {
               background-color: rgba(34, 197, 94, 0.1);
               color: #16a34a;
               border: 1px solid rgba(34, 197, 94, 0.3);
             }
-            
+
             &.error {
               background-color: rgba(239, 68, 68, 0.1);
               color: #dc2626;
@@ -230,7 +238,11 @@
       flex-wrap: wrap;
 
       button {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
         color: white;
         border: none;
         padding: 0.8rem 1.5rem;
@@ -264,13 +276,17 @@
     }
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, var(--text-primary), var(--text-secondary));
+      background: linear-gradient(
+        180deg,
+        var(--text-primary),
+        var(--text-secondary)
+      );
     }
 
     .timeline-item {
@@ -288,7 +304,7 @@
       }
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -2.25rem;
         top: 1.5rem;
@@ -336,7 +352,7 @@
           position: relative;
 
           &::before {
-            content: '▸';
+            content: "▸";
             color: var(--secondary-color);
             position: absolute;
             left: -1rem;
@@ -346,7 +362,8 @@
     }
   }
 
-  .education-list, .skills-grid {
+  .education-list,
+  .skills-grid {
     display: grid;
     gap: 1.5rem;
   }
@@ -360,7 +377,8 @@
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      transition: transform var(--transition-base),
+        box-shadow var(--transition-base);
       border: 1px solid var(--border-color);
 
       &:hover {
@@ -403,14 +421,14 @@
 
     @media (max-width: 480px) {
       gap: 1rem;
-      
+
       .education-item {
         padding: 1rem;
-        
+
         h3 {
           font-size: 1.1rem;
         }
-        
+
         .period {
           font-size: 0.8rem;
           padding: 0.2rem 0.6rem;
@@ -462,7 +480,12 @@
         }
 
         .skill-tag {
-          background: linear-gradient(135deg, var(--primary-bg), var(--border-color));
+          background: linear-gradient(
+            135deg,
+            var(--accent-color),
+            var(--accent-hover)
+          );
+          color: white;
           padding: 0.4rem 0.8rem;
           border-radius: 20px;
           font-size: 0.9rem;
@@ -474,8 +497,8 @@
           text-overflow: ellipsis;
 
           &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px var(--accent-color);
           }
         }
       }
@@ -486,7 +509,11 @@
         gap: 0.5rem;
 
         .skill-tag {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          background: linear-gradient(
+            135deg,
+            var(--primary-color),
+            var(--secondary-color)
+          );
           color: white;
           padding: 0.3rem 0.8rem;
           border-radius: 20px;
@@ -522,7 +549,9 @@
 
   // Estilos específicos para la sección de habilidades profesionales
   .soft-skills-section {
-    margin-bottom: var(--spacing-2xl); // Espacio extra después de la última sección
+    margin-bottom: var(
+      --spacing-2xl
+    ); // Espacio extra después de la última sección
     padding-bottom: var(--spacing-2xl); // Padding inferior adicional
 
     h2 {
@@ -595,10 +624,18 @@
   animation-fill-mode: both;
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.timeline-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.timeline-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.timeline-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes slideInLeft {
   from {
