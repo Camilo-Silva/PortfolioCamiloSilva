@@ -100,6 +100,41 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     this.currentImageIndex = index;
   }
 
+  // Método para formatear el contenido del flujo como HTML
+  getFormattedFlowContent(): string {
+    if (!this.project?.flujoApp) {
+      return '';
+    }
+
+    // Convertir markdown básico a HTML
+    let htmlContent = this.project.flujoApp
+      // Títulos h2
+      .replace(/## (.*)/g, '<h2>$1</h2>')
+      // Títulos h3
+      .replace(/### (.*)/g, '<h3>$1</h3>')
+      // Texto en negrita
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Separador horizontal
+      .replace(/---/g, '<hr>')
+      // Items de lista con checkmark
+      .replace(/- ✅ \*\*(.*?)\*\*: (.*)/g, '<li class="check-item"><strong>$1</strong>: $2</li>')
+      // Items de lista normales
+      .replace(/- (.*)/g, '<li>$1</li>')
+      // Números de lista
+      .replace(/(\d+)\. (.*)/g, '<li class="numbered">$2</li>')
+      // Saltos de línea dobles para párrafos
+      .replace(/\n\n/g, '</p><p>')
+      // Saltos de línea simples para <br>
+      .replace(/\n/g, '<br>');
+
+    // Envolver en párrafos si no hay etiquetas de bloque
+    if (!htmlContent.includes('<h2>') && !htmlContent.includes('<h3>')) {
+      htmlContent = '<p>' + htmlContent + '</p>';
+    }
+
+    return htmlContent;
+  }
+
   @HostListener('document:keydown.escape', ['$event'])
   onEscapeKey(event: KeyboardEvent): void {
     if (this.isOpen) {

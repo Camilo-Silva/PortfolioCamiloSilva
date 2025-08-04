@@ -66,6 +66,12 @@
         </div>
       </div>
 
+      <!-- Flujo de App (solo para proyecto con id '2') -->
+      <div class="flow-section" *ngIf="project.flujoApp">
+        <h3>Flujo de App</h3>
+        <div class="flow-content" [innerHTML]="getFormattedFlowContent()"></div>
+      </div>
+
       <!-- Botones de acción -->
       <div class="action-buttons">
         <a 

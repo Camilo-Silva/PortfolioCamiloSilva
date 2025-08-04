@@ -230,6 +230,111 @@
   }
 }
 
+.flow-section {
+  margin-bottom: var(--spacing-xl);
+
+  h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+  }
+
+  .flow-content {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--spacing-lg);
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.6;
+
+    // Estilos para el contenido markdown convertido
+    h2 {
+      color: var(--accent-color);
+      font-size: var(--font-size-lg);
+      margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 2px solid var(--accent-color);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      color: var(--text-primary);
+      font-size: var(--font-size-base);
+      margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-secondary);
+    }
+
+    strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: var(--spacing-lg) 0;
+    }
+
+    ul, ol {
+      margin: var(--spacing-sm) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    li {
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-secondary);
+
+      &.check-item {
+        list-style: none;
+        position: relative;
+        padding-left: var(--spacing-lg);
+
+        &::before {
+          content: '✅';
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+
+      &.numbered {
+        color: var(--text-secondary);
+      }
+    }
+
+    // Scroll personalizado
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--border-color);
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 3px;
+
+      &:hover {
+        background: var(--accent-hover);
+      }
+    }
+  }
+}
+
 .action-buttons {
   display: flex;
   gap: var(--spacing-md);
