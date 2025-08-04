@@ -27,13 +27,13 @@ export class ProjectsService {
       {
         id: '1',
         nombre: 'Spotify Clon',
-        descripcion: 'Este proyecto es un clon de Spotify desarrollado con Angular 17.3, que implementa un reproductor de música, gestión de usuarios, historial, favoritos y navegación modular. El objetivo es practicar arquitectura escalable, buenas prácticas y el uso de Angular moderno (standalone components, directivas y pipes).',
+        descripcion: 'Este proyecto es un clon de Spotify desarrollado con Angular 17.3, que implementa un reproductor de música, gestión de usuarios, historial, favoritos y navegación modular. El objetivo es practicar arquitectura escalable, buenas prácticas y el uso de Angular moderno (standalone components, directivas y pipes. Integración con API deployada en https://api-reproductormusica-production.up.railway.app/ ).',
         imagenes: [
           '/assets/images/project1-1.jpg',
           '/assets/images/project1-2.jpg',
           '/assets/images/project1-3.jpg'
         ],
-        tecnologias: ['Angular', 'TypeScript', 'SCSS', 'RxJS', 'Angular Router'],
+        tecnologias: ['Angular', 'TypeScript', 'SCSS', 'RxJS', 'Angular Router', 'API REST'],
         githubUrl: 'https://github.com/Camilo-Silva/AppReproductorMusica.git',
         hostedUrl: 'https://spotify-clon-camilo-silva.netlify.app/',
         thumbnailUrl: '/assets/images/project1.jpg'
@@ -55,16 +55,16 @@ export class ProjectsService {
       },
       {
         id: '3',
-        nombre: 'E-commerce Platform',
-        descripcion: 'Aplicación web de portafolio profesional desarrollada con Angular 18+, featuring routing, tema claro/oscuro, diseño responsivo y arquitectura de componentes moderna.',
+        nombre: 'Calculadora Python',
+        descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
         imagenes: [
           '/assets/images/project3-1.jpg',
           '/assets/images/project3-2.jpg',
           '/assets/images/project3-3.jpg'
         ],
-        tecnologias: ['React', 'Next.js', 'Stripe', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
-        githubUrl: 'https://github.com/camilosilva/ecommerce-platform',
-        hostedUrl: 'https://ecommerce-platform-demo.vercel.app',
+        tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
+        githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
+        hostedUrl: 'https://calculadorapython-production.up.railway.app/',
         thumbnailUrl: '/assets/images/project3.jpg'
       }
     ];
