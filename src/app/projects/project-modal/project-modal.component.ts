@@ -100,39 +100,165 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     this.currentImageIndex = index;
   }
 
+  // Método para obtener los usuarios de prueba estructurados
+  get testUsers() {
+    // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
+    if (!this.project?.hasFlowDetails || this.project.id !== '2') return [];
+    
+    return [
+      {
+        emoji: '👨‍💼',
+        title: 'Admin',
+        email: 'admin@turno-smart.com',
+        password: 'Admin123!'
+      },
+      {
+        emoji: '👤',
+        title: 'Paciente',
+        email: 'paciente15@turno-smart.com.ar',
+        password: 'cualquiera1'
+      },
+      {
+        emoji: '⚕️',
+        title: 'Médico',
+        email: 'medico1@turno-smart.com.ar',
+        password: 'NuevoMedic0!'
+      },
+      {
+        emoji: '👩‍💼',
+        title: 'Recepcionista',
+        email: 'recepcion1@turno-smart.com.ar',
+        password: 'Recep123!'
+      }
+    ];
+  }
+
+  // Método para copiar texto al portapapeles
+  async copyToClipboard(text: string, feedbackKey: string): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(text);
+      // Mostrar feedback visual temporal
+      this.showCopyFeedback(feedbackKey);
+    } catch (err) {
+      console.error('Error al copiar al portapapeles:', err);
+      // Fallback para navegadores que no soportan clipboard API
+      this.fallbackCopy(text, feedbackKey);
+    }
+  }
+
+  // Feedback visual para la copia
+  private copyFeedback: { [key: string]: boolean } = {};
+  
+  private showCopyFeedback(feedbackKey: string): void {
+    this.copyFeedback[feedbackKey] = true;
+    setTimeout(() => {
+      this.copyFeedback[feedbackKey] = false;
+    }, 2000); // Mostrar feedback por 2 segundos
+  }
+
+  // Método de respaldo para copiar en navegadores antiguos
+  private fallbackCopy(text: string, feedbackKey: string): void {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+      document.execCommand('copy');
+      this.showCopyFeedback(feedbackKey);
+      console.log('Texto copiado usando fallback');
+    } catch (err) {
+      console.error('Error en fallback copy:', err);
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  }
+
+  // Verificar si el feedback de copia está activo
+  isCopyFeedbackActive(userId: number, type: 'email' | 'password'): boolean {
+    return this.copyFeedback[`${userId}-${type}`] || false;
+  }
+
+  // Método para obtener los roles estructurados
+  get userRoles() {
+    // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
+    if (!this.project?.hasFlowDetails || this.project.id !== '2') return [];
+    
+    return [
+      {
+        emoji: '👨‍💼',
+        title: 'Administrador',
+        subtitle: 'Acceso Completo:',
+        features: [
+          'Dashboard general',
+          'Gestión de médicos',
+          'Gestión de pacientes',
+          'Especialidades médicas',
+          'Todos los turnos',
+          'Historiales completos'
+        ]
+      },
+      {
+        emoji: '👤',
+        title: 'Paciente',
+        subtitle: 'Auto-gestión:',
+        features: [
+          'Ver y editar perfil',
+          'Reservar turnos',
+          'Ver mis turnos',
+          'Cambiar contraseña'
+        ],
+        extra: 'Registro: Formulario completo con DNI, email, fecha nacimiento'
+      },
+      {
+        emoji: '⚕️',
+        title: 'Médico',
+        subtitle: 'Gestión Médica:',
+        features: [
+          'Mi agenda diaria',
+          'Crear historiales',
+          'Ver mis pacientes',
+          'Gestionar citas'
+        ],
+        extra: 'Historiales: Síntomas, diagnóstico, tratamiento, prescripciones'
+      },
+      {
+        emoji: '👩‍💼',
+        title: 'Recepcionista',
+        subtitle: 'Coordinación:',
+        features: [
+          'Registrar pacientes',
+          'Confirmar agenda médica',
+          'Gestionar turnos',
+          'Atención al cliente'
+        ],
+        extra: 'Workflow: Primera línea de contacto y coordinación'
+      }
+    ];
+  }
+
   // Método para formatear el contenido del flujo como HTML
   getFormattedFlowContent(): string {
-    if (!this.project?.flujoApp) {
+    // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
+    if (!this.project?.hasFlowDetails || this.project.id !== '2') {
       return '';
     }
 
-    // Convertir markdown básico a HTML
-    let htmlContent = this.project.flujoApp
-      // Títulos h2
-      .replace(/## (.*)/g, '<h2>$1</h2>')
-      // Títulos h3
-      .replace(/### (.*)/g, '<h3>$1</h3>')
-      // Texto en negrita
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Separador horizontal
-      .replace(/---/g, '<hr>')
-      // Items de lista con checkmark
-      .replace(/- ✅ \*\*(.*?)\*\*: (.*)/g, '<li class="check-item"><strong>$1</strong>: $2</li>')
-      // Items de lista normales
-      .replace(/- (.*)/g, '<li>$1</li>')
-      // Números de lista
-      .replace(/(\d+)\. (.*)/g, '<li class="numbered">$2</li>')
-      // Saltos de línea dobles para párrafos
-      .replace(/\n\n/g, '</p><p>')
-      // Saltos de línea simples para <br>
-      .replace(/\n/g, '<br>');
-
-    // Envolver en párrafos si no hay etiquetas de bloque
-    if (!htmlContent.includes('<h2>') && !htmlContent.includes('<h3>')) {
-      htmlContent = '<p>' + htmlContent + '</p>';
-    }
-
-    return htmlContent;
+    // Solo mostrar el flujo de reserva de turnos como texto simple
+    return `
+      <h2>📋 Flujo de Reserva de Turnos</h2>
+      <p><strong>Proceso Simplificado:</strong></p>
+      <ol>
+        <li><strong>Especialidad</strong> → Elegir área médica</li>
+        <li><strong>Médico</strong> → Seleccionar profesional</li>
+        <li><strong>Horario</strong> → Fecha y hora disponible</li>
+        <li><strong>Confirmación</strong> → Turno reservado</li>
+      </ol>
+    `;
   }
 
   @HostListener('document:keydown.escape', ['$event'])

@@ -248,6 +248,141 @@
     overflow-y: auto;
     line-height: 1.6;
 
+    // Grids para usuarios y roles
+    .users-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+
+      .user-card {
+        background-color: var(--background-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: var(--spacing-xs);
+        min-width: 0; // Permite que las tarjetas se encojan
+        
+        h4 {
+          margin: 0 0 var(--spacing-md) 0;
+          color: var(--accent-color);
+          font-size: var(--font-size-base);
+        }
+
+        .credential-row {
+          display: flex;
+          align-items: center;
+          margin-bottom: var(--spacing-sm);
+          gap: var(--spacing-xs);
+
+          .credential-label {
+            color: var(--text-primary);
+            font-size: var(--font-size-sm);
+            min-width: 30px;
+          }
+
+          .credential-value {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            flex: 1;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: var(--secondary-bg);
+            padding: var(--spacing-xs);
+            border-radius: 4px;
+            word-break: break-all;
+            
+          }
+
+          .copy-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: var(--spacing-xs);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            min-width: 32px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .copy-icon {
+              width: 16px;
+              height: 16px;
+              transition: all var(--transition-fast);
+            }
+
+            // Tema claro (por defecto)
+            &:hover {
+              background-color: var(--accent-color);
+              border-color: var(--accent-color);
+              transform: scale(1.05);
+
+              .copy-icon {
+                content: url('/assets/images/copyWhite.png');
+              }
+            }
+
+            &.copied {
+              background-color: #28a745;
+              border-color: #28a745;
+              color: white;
+              transform: scale(1.1);
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+
+            // Para el emoji de confirmación
+            span {
+              font-size: 14px;
+            }
+          }
+
+
+        }
+
+        strong {
+          color: var(--text-primary);
+          font-size: var(--font-size-sm);
+        }
+      }
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+
+      .role-section {
+        h3 {
+          color: var(--accent-color);
+          font-size: var(--font-size-lg);
+          margin: 0 0 var(--spacing-md) 0;
+          border-bottom: 2px solid var(--accent-color);
+          padding-bottom: var(--spacing-xs);
+        }
+
+        strong {
+          color: var(--text-primary);
+          display: block;
+          margin-bottom: var(--spacing-sm);
+        }
+
+        ul {
+          margin: 0;
+          padding-left: var(--spacing-md);
+          
+          li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+          }
+        }
+      }
+    }
+
     // Estilos para el contenido markdown convertido
     h2 {
       color: var(--accent-color);
@@ -311,6 +446,26 @@
       }
     }
 
+    // Responsive para móviles
+    @media (max-width: 768px) {
+      .users-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roles-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+    }
+
+    // Para pantallas muy pequeñas
+    @media (max-width: 480px) {
+      .users-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+      }
+    }
+
     // Scroll personalizado
     scrollbar-width: thin;
     scrollbar-color: var(--accent-color) var(--border-color);
@@ -333,6 +488,15 @@
       }
     }
   }
+}
+
+// Estilos específicos para tema oscuro boton copy
+::ng-deep [data-theme="dark"] .copy-btn .copy-icon {
+  content: url('/assets/images/copyWhite.png') !important;
+}
+
+::ng-deep [data-theme="dark"] .copy-btn:hover .copy-icon {
+  content: url('/assets/images/copyBlack.png') !important;
 }
 
 .action-buttons {
@@ -439,3 +603,5 @@
     }
   }
 }
+
+

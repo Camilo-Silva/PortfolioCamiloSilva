@@ -66,10 +66,72 @@
         </div>
       </div>
 
-      <!-- Flujo de App (solo para proyecto con id '2') -->
-      <div class="flow-section" *ngIf="project.flujoApp">
+      <!-- Flujo de App (solo para proyectos con hasFlowDetails) -->
+      <div class="flow-section" *ngIf="project.hasFlowDetails">
         <h3>Flujo de App</h3>
-        <div class="flow-content" [innerHTML]="getFormattedFlowContent()"></div>
+        <div class="flow-content">
+          
+          <!-- Usuarios de Prueba -->
+          <h2>🔐 Usuarios de Prueba</h2>
+          <div class="users-grid">
+            <div class="user-card" *ngFor="let user of testUsers; let i = index">
+              <h4>{{ user.emoji }} {{ user.title }}</h4>
+              
+              <div class="credential-row">
+                <span class="credential-label"><strong>Email:</strong></span>
+                <span class="credential-value">{{ user.email }}</span>
+                <button 
+                  class="copy-btn"
+                  [class.copied]="isCopyFeedbackActive(i, 'email')"
+                  (click)="copyToClipboard(user.email, i + '-email')"
+                  title="Copiar email">
+                  <img *ngIf="!isCopyFeedbackActive(i, 'email')" 
+                       src="/assets/images/copyBlack.png" 
+                       alt="Copiar" 
+                       class="copy-icon">
+                  <span *ngIf="isCopyFeedbackActive(i, 'email')">✅</span>
+                </button>
+              </div>
+              
+              <div class="credential-row">
+                <span class="credential-label"><strong>Pass:</strong></span>
+                <span class="credential-value">{{ user.password }}</span>
+                <button 
+                  class="copy-btn"
+                  [class.copied]="isCopyFeedbackActive(i, 'password')"
+                  (click)="copyToClipboard(user.password, i + '-password')"
+                  title="Copiar contraseña">
+                  <img *ngIf="!isCopyFeedbackActive(i, 'password')" 
+                       src="/assets/images/copyBlack.png" 
+                       alt="Copiar" 
+                       class="copy-icon">
+                  <span *ngIf="isCopyFeedbackActive(i, 'password')">✅</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Roles y Funcionalidades -->
+          <h2>🚀 Roles y Funcionalidades</h2>
+          <div class="roles-grid">
+            <div class="role-section" *ngFor="let role of userRoles">
+              <h3>{{ role.emoji }} {{ role.title }}</h3>
+              <strong>{{ role.subtitle }}</strong>
+              <ul>
+                <li *ngFor="let feature of role.features">{{ feature }}</li>
+              </ul>
+              <strong *ngIf="role.extra">{{ role.extra }}</strong>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Flujo de Reserva -->
+          <div [innerHTML]="getFormattedFlowContent()"></div>
+          
+        </div>
       </div>
 
       <!-- Botones de acción -->
