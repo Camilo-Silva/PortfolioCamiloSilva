@@ -9,7 +9,7 @@
   --primary-bg: #ffffff;
   --secondary-bg: #f8f9fa;
   --background-secondary: #f0f0f0;
-  --card-background: #transparent;
+  --card-background: transparent;
   --text-primary: #333333;
   --text-secondary: #666666;
   --accent-color: #ff8a00;
@@ -51,7 +51,9 @@
   --transition-slow: 0.5s ease-in-out;
   
   // Background images
-  --background-image: url('/assets/images/FondoLight.png');
+  // --background-image: url('/assets/images/FondoLight.png');
+  --background-image: none;
+  --background-color: #E9E9E9; // Color de fondo para tema claro
 }
 
 // Dark theme
@@ -59,7 +61,7 @@
   --primary-bg: #1a1a1a;
   --secondary-bg: #2d2d2d;
   --background-secondary: #3d3d3d;
-  --card-background: #transparent;
+  --card-background: transparent;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
   --accent-color: #4a9eff;
@@ -69,9 +71,13 @@
   --form-contact: #2d3d70;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   
-  // Background images
-  --background-image: url('/assets/images/FondoDark.png');
+  // Background - usando color en lugar de imagen para prueba
+  // --background-image: url('/assets/images/FondoDark.png');
+  --background-image: none;
+  --background-color: #1D2633;
 }
+  
+
 
 // Reset and base styles
 * {
@@ -93,7 +99,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: var(--primary-bg);
+  background-color: var(--background-color, var(--primary-bg)); // Usar --background-color si existe, sino --primary-bg
   color: var(--text-primary);
   line-height: 1.6;
   margin: 0;

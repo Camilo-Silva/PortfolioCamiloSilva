@@ -57,6 +57,43 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       position: relative;
+      
+      &.typewriter-text {
+        display: inline-flex;
+        align-items: baseline; /* Cambiado de center a baseline para mejor alineación */
+        
+        .typewriter-container {
+          white-space: pre;
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
+          display: inline-block; /* Asegurar que se comporte como texto inline */
+          line-height: normal; /* Normalizar la línea */
+        }
+        
+        .cursor {
+          display: inline-block;
+          margin-left: 2px;
+          width: 3px;
+          height: 1em;
+          vertical-align: middle;
+          animation: cursor-blink 1s step-end infinite;
+          -webkit-background-clip: initial;
+          -webkit-text-fill-color: var(--accent-color);
+          background-clip: initial;
+          position: relative;
+          top: -2px; /* Ajuste fino para alinear verticalmente */
+        }
+      }
+    }
+    
+    @keyframes cursor-blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
     }
   }
 
@@ -132,6 +169,63 @@
       left: 20%;
       animation-delay: 4s;
     }
+
+    &.element-4 {
+      width: 120px;
+      height: 120px;
+      top: 40%;
+      right: 20%;
+      animation-delay: 5s;
+    }
+
+    &.element-5 {
+      width: 100px;
+      height: 100px;
+      bottom: 10%;
+      right: 5%;
+      animation-delay: 6s;
+    }
+
+    &.element-6 {
+      width: 100px;
+      height: 100px;
+      bottom: 15%;
+      right: 45%;
+      animation-delay: 6s;
+    }
+
+    &.element-7 {
+      width: 100px;
+      height: 100px;
+      bottom: 75%;
+      right: 68%;
+      animation-delay: 6s;
+    }
+
+    &.element-8 {
+      width: 100px;
+      height: 100px;
+      bottom: 50%;
+      right: 65%;
+      animation-delay: 6s;
+    }
+
+    &.element-9 {
+      width: 100px;
+      height: 100px;
+      bottom: 80%;
+      right: 50%;
+      animation-delay: 6s;
+    }
+
+    &.element-10 {
+      width: 100px;
+      height: 100px;
+      bottom: 70%;
+      right: 35%;
+      animation-delay: 6s;
+    }
+
   }
 }
 

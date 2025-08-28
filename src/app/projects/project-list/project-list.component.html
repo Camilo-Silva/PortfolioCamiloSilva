@@ -1,28 +1,90 @@
-<div class="project-list">
-  <div 
-    *ngFor="let project of projects; trackBy: trackByProjectId"
-    class="project-item"
-    (mouseenter)="onProjectHover(project)"
-    (mouseleave)="onProjectLeave()"
-    (click)="onProjectClick(project)">
+<div class="project-carousel">
+  <!-- Controles del carrusel -->
+  <div class="carousel-controls">
+    <button 
+      class="carousel-btn carousel-btn-left"
+      (click)="scrollLeft()"
+      [disabled]="!canScrollLeft"
+      [class.disabled]="!canScrollLeft">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
     
-    <div class="project-info">
-      <h3 class="project-name">{{ project.nombre }}</h3>
-      <p class="project-description">{{ project.descripcion }}</p>
-      
-      <div class="project-technologies">
-        <span 
-          *ngFor="let tech of project.tecnologias" 
-          class="tech-badge">
-          {{ tech }}
-        </span>
+    <button 
+      class="carousel-btn carousel-btn-right"
+      (click)="scrollRight()"
+      [disabled]="!canScrollRight"
+      [class.disabled]="!canScrollRight">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Contenedor del carrusel -->
+  <div class="carousel-container" #carousel>
+    <div class="carousel-track">
+      <div 
+        *ngFor="let project of projects; trackBy: trackByProjectId"
+        class="project-card"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Ver detalles del proyecto ' + project.nombre"
+        (mouseenter)="onProjectHover(project)"
+        (mouseleave)="onProjectLeave()"
+        (click)="onProjectClick(project)"
+        (keydown)="onProjectKeyDown($event, project)">
+        
+        <!-- Imagen del proyecto -->
+        <div class="project-image">
+          <img 
+            [src]="project.thumbnailUrl" 
+            [alt]="project.nombre"
+            loading="lazy">
+        </div>
+        
+        <!-- Información del proyecto -->
+        <div class="project-info">
+          <h3 class="project-name">{{ project.nombre }}</h3>
+          <p class="project-description">{{ getShortDescription(project.descripcion) }}</p>
+          
+          <!-- Tecnologías principales (máximo 3) -->
+          <div class="project-technologies">
+            <span 
+              *ngFor="let tech of project.tecnologias.slice(0, 3)" 
+              class="tech-badge">
+              {{ tech }}
+            </span>
+            <span 
+              *ngIf="project.tecnologias.length > 3" 
+              class="tech-more">
+              +{{ project.tecnologias.length - 3 }}
+            </span>
+          </div>
+        </div>
+        
+        <!-- Acción rápida -->
+        <div class="project-actions">
+          <button class="project-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Ver Detalles
+          </button>
+        </div>
       </div>
     </div>
-    
-    <div class="project-actions">
-      <button class="project-button">
-        Ver Detalles
-      </button>
-    </div>
+  </div>
+
+  <!-- Indicadores del carrusel -->
+  <div class="carousel-indicators">
+    <button 
+      *ngFor="let dot of [].constructor(projects.length - itemsPerView + 1); let i = index"
+      class="indicator"
+      [attr.aria-label]="'Ir al grupo de proyectos ' + (i + 1)"
+      [class.active]="i === currentIndex"
+      (click)="currentIndex = i; updateCarouselPosition()">
+    </button>
   </div>
 </div>

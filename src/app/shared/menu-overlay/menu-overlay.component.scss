@@ -30,7 +30,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--primary-bg);
+    background-color: var(--background-color, var(--primary-bg));
     border-radius: 1rem;
     padding: var(--spacing-2xl);
     box-shadow: var(--shadow);

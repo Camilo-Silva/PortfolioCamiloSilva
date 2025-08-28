@@ -235,8 +235,9 @@
           border: 2px solid var(--border-color);
           border-radius: 8px;
           font-size: 1rem;
+          font-family: var(--font-family); 
           background: var(--form-contact);
-          color: var(--text-color);
+          color: var(--text-primary);
           transition: all 0.3s ease;
 
           &:focus {
@@ -246,8 +247,11 @@
           }
 
           &::placeholder {
-            color: var(--text-color);
-            opacity: 0.6;
+            color: var(--text-secondary);
+            opacity: 0.8; // Aumentar opacidad para mejor legibilidad
+            font-family: var(--font-family); // Forzar fuente Inter
+            font-weight: 400; // Peso normal
+            font-style: normal; // Estilo normal
           }
         }
 

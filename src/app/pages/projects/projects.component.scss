@@ -35,9 +35,8 @@
   }
 
   .projects-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-2xl);
+    display: flex;
+    justify-content: center;
     align-items: start;
     width: 100%;
     padding: 0 var(--spacing-lg); // Padding interno para no tocar los bordes
@@ -45,39 +44,9 @@
 
     .projects-list {
       position: relative;
+      width: 100%;
+      max-width: 1200px; // Limitar ancho máximo para mejor centrado
       padding-bottom: var(--spacing-2xl); // Espacio adicional después del último proyecto
-    }
-
-    .project-preview {
-      position: sticky;
-      top: 100px;
-      height: 400px;
-      border-radius: 1rem;
-      overflow: hidden;
-      background-color: transparent;
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all var(--transition-base);
-
-      &.visible {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      .preview-image {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 1rem;
-        }
-      }
     }
   }
 }
@@ -86,13 +55,8 @@
 @media (max-width: 1024px) {
   .projects {
     .projects-content {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-xl);
-
-      .project-preview {
-        position: static;
-        height: 300px;
-        order: -1;
+      .projects-list {
+        max-width: 900px; // Ajustar ancho máximo en tablets
       }
     }
   }
@@ -111,11 +75,8 @@
     }
 
     .projects-content {
-      .project-preview {
-        height: 250px;
-      }
-
       .projects-list {
+        max-width: 100%; // Usar todo el ancho disponible en móviles
         padding-bottom: var(--spacing-xl); // Espacio adicional en móviles también
       }
     }
@@ -127,12 +88,6 @@
     .projects-header {
       .section-title {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
-      }
-    }
-
-    .projects-content {
-      .project-preview {
-        height: 200px;
       }
     }
   }

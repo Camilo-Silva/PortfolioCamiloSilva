@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     height: var(--header-height); // Usar la variable CSS
-    background: var(--primary-bg); // Color sólido como respaldo
+    background: var(--background-color, var(--primary-bg)); // Usar --background-color si existe, sino --primary-bg
     background-image: var(--background-image);
     background-size: 100% 100%;
     background-position: center;

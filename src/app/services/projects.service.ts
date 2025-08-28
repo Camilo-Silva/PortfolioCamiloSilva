@@ -66,7 +66,36 @@ export class ProjectsService {
         githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
         hostedUrl: 'https://calculadorapython-production.up.railway.app/',
         thumbnailUrl: '/assets/images/project3.jpg'
+      },
+      {
+        id: '4',
+        nombre: 'Calculadora Python',
+        descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
+        imagenes: [
+          '/assets/images/project4-1.jpg',
+          '/assets/images/project4-2.jpg',
+          '/assets/images/project4-3.jpg',
+        ],
+        tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
+        githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
+        hostedUrl: 'https://calculadorapython-production.up.railway.app/',
+        thumbnailUrl: '/assets/images/project4.jpg'
+      },
+      {
+        id: '5',
+        nombre: 'Calculadora Python',
+        descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
+        imagenes: [
+          '/assets/images/project3-1.jpg',
+          '/assets/images/project3-2.jpg',
+          '/assets/images/project3-3.jpg'
+        ],
+        tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
+        githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
+        hostedUrl: 'https://calculadorapython-production.up.railway.app/',
+        thumbnailUrl: '/assets/images/project3.jpg'
       }
+
     ];
   }
 

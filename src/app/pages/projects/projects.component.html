@@ -16,13 +16,6 @@
           (projectClick)="onProjectClick($event)">
         </app-project-list>
       </div>
-
-      <!-- Vista previa de imagen -->
-      <div class="project-preview" [class.visible]="hoveredProject">
-        <div class="preview-image" *ngIf="hoveredProject">
-          <img [src]="hoveredProject.thumbnailUrl" [alt]="hoveredProject.nombre" />
-        </div>
-      </div>
     </div>
 
     <!-- Modal de proyecto -->

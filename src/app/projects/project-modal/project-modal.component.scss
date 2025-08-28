@@ -32,11 +32,8 @@
 }
 
 .modal-content {
-  background-image: var(--background-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: var(--primary-bg);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 1rem;
   max-width: 800px;
   width: 100%;
@@ -46,6 +43,7 @@
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   transform: scale(0.9) translateY(20px);
   transition: transform var(--transition-base);
+  backdrop-filter: blur(10px);
   
   // Asegurar scroll suave y ocultar barras de scroll
   scrollbar-width: none; // Firefox
