@@ -4,51 +4,9 @@
   max-width: 1200px;
   margin: 0 auto;
   
-  // Controles del carrusel
+  // Controles del carrusel - Ocultos, ahora estarán junto a los indicadores
   .carousel-controls {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -50px;
-    right: -50px;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    
-    .carousel-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: var(--accent-color);
-      color: white;
-      cursor: pointer;
-      pointer-events: all;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
-      
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-      
-      &:hover:not(.disabled) {
-        background: var(--accent-color);
-        transform: scale(1.1);
-        box-shadow: 0 6px 16px rgba(74, 158, 255, 0.4);
-      }
-      
-      &.disabled {
-        background: var(--text-secondary);
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: scale(0.9);
-      }
-    }
+    display: none;
   }
   
   // Contenedor del carrusel
@@ -82,7 +40,6 @@
           
           .project-actions {
             opacity: 1;
-            transform: translateY(0);
           }
         }
         
@@ -156,39 +113,36 @@
         // Acciones del proyecto
         .project-actions {
           position: absolute;
-          bottom: 24px;
-          left: 24px;
-          right: 24px;
+          bottom: 12px;
+          right: 12px;
           opacity: 0;
-          transform: translateY(10px);
           transition: all 0.3s ease;
           
           .project-button {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--accent-color);
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             
             svg {
-              width: 16px;
-              height: 16px;
+              width: 18px;
+              height: 18px;
             }
             
             &:hover {
-              background: rgba(74, 158, 255, 0.9);
-              transform: translateY(-2px);
-              box-shadow: 0 6px 20px rgba(74, 158, 255, 0.4);
+              background: var(--accent-color);
+              transform: scale(1.1);
+              box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
             }
           }
         }
@@ -196,12 +150,52 @@
     }
   }
   
-  // Indicadores del carrusel
+  // Indicadores del carrusel con controles de navegación
   .carousel-indicators {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    align-items: center;
+    gap: 16px;
     margin-top: 24px;
+    
+    .carousel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent-color);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(74, 158, 255, 0.3);
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      
+      &:hover:not(.disabled) {
+        background: var(--accent-color);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+      }
+      
+      &.disabled {
+        background: var(--text-secondary);
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: scale(0.9);
+      }
+    }
+    
+    .indicators-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
     
     .indicator {
       width: 12px;
@@ -292,13 +286,18 @@
           }
           
           .project-actions {
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
+            bottom: 12px;
+            right: 12px;
             
             .project-button {
-              padding: 10px 14px;
-              font-size: 0.85rem;
+              width: 50px;
+              height: 50px;
+              font-size: 0.65rem;
+              
+              svg {
+                width: 10px;
+                height: 10px;
+              }
             }
           }
         }
@@ -343,6 +342,21 @@
               .tech-badge {
                 font-size: 0.7rem;
                 padding: 3px 8px;
+              }
+            }
+          }
+          
+          .project-actions {
+            bottom: 8px;
+            right: 8px;
+            
+            .project-button {
+              width: 30px;
+              height: 30px;
+              
+              svg {
+                width: 14px;
+                height: 14px;
               }
             }
           }

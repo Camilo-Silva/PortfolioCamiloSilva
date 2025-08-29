@@ -66,25 +66,51 @@
         
         <!-- Acción rápida -->
         <div class="project-actions">
-          <button class="project-button">
+          <button class="project-button" [attr.aria-label]="'Ver detalles de ' + project.nombre">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-1 15h2v-6h-2v6Z"/>
             </svg>
-            Ver Detalles
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Indicadores del carrusel -->
+  <!-- Indicadores del carrusel con navegación integrada -->
   <div class="carousel-indicators">
+    <!-- Flecha izquierda -->
     <button 
-      *ngFor="let dot of [].constructor(projects.length - itemsPerView + 1); let i = index"
-      class="indicator"
-      [attr.aria-label]="'Ir al grupo de proyectos ' + (i + 1)"
-      [class.active]="i === currentIndex"
-      (click)="currentIndex = i; updateCarouselPosition()">
+      class="carousel-btn" 
+      [class.disabled]="currentIndex === 0"
+      (click)="scrollLeft()"
+      [disabled]="currentIndex === 0"
+      [attr.aria-label]="'Anterior grupo de proyectos'">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    
+    <!-- Puntos indicadores -->
+    <div class="indicators-dots">
+      <button 
+        *ngFor="let dot of [].constructor(projects.length - itemsPerView + 1); let i = index"
+        class="indicator"
+        [attr.aria-label]="'Ir al grupo de proyectos ' + (i + 1)"
+        [class.active]="i === currentIndex"
+        (click)="currentIndex = i; updateCarouselPosition()">
+      </button>
+    </div>
+    
+    <!-- Flecha derecha -->
+    <button 
+      class="carousel-btn" 
+      [class.disabled]="currentIndex === projects.length - itemsPerView"
+      (click)="scrollRight()"
+      [disabled]="currentIndex === projects.length - itemsPerView"
+      [attr.aria-label]="'Siguiente grupo de proyectos'">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+      </svg>
     </button>
   </div>
 </div>

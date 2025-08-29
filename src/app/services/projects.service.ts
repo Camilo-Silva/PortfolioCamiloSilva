@@ -40,7 +40,7 @@ export class ProjectsService {
       },
       {
         id: '2',
-        nombre: 'Sistema de Gestión de Turnos',
+        nombre: 'App de Gestión de Turnos',
         descripcion: 'es un sistema integral de gestión de turnos médicos desarrollado con ASP.NET Core 8.0 MVC. La aplicación facilita la administración de citas médicas, permitiendo la gestión de pacientes, médicos, especialidades, turnos y historiales médicos de manera eficiente y centralizada.',
         imagenes: [
           '/assets/images/project2-1.jpg',
@@ -69,8 +69,8 @@ export class ProjectsService {
       },
       {
         id: '4',
-        nombre: 'Calculadora Python',
-        descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
+        nombre: 'Way Combat',
+        descripcion: 'Un juego de combate en 2D desarrollado con Phaser.js que incluye: Múltiples personajes jugables - Diferentes modos de juego: Arcade, Supervivencia - Gráficos pixel art y animaciones fluidas - Sistema de combos y habilidades especiales - Música y efectos de sonido envolventes - Tablas de clasificación en línea',
         imagenes: [
           '/assets/images/project4-1.jpg',
           '/assets/images/project4-2.jpg',
@@ -80,20 +80,6 @@ export class ProjectsService {
         githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
         hostedUrl: 'https://calculadorapython-production.up.railway.app/',
         thumbnailUrl: '/assets/images/project4.jpg'
-      },
-      {
-        id: '5',
-        nombre: 'Calculadora Python',
-        descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
-        imagenes: [
-          '/assets/images/project3-1.jpg',
-          '/assets/images/project3-2.jpg',
-          '/assets/images/project3-3.jpg'
-        ],
-        tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
-        githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
-        hostedUrl: 'https://calculadorapython-production.up.railway.app/',
-        thumbnailUrl: '/assets/images/project3.jpg'
       }
 
     ];
