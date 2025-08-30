@@ -5,6 +5,8 @@ export interface Project {
   id: string;
   nombre: string;
   descripcion: string;
+  descripcionCorta: string; 
+  videos?: string[]; // URLs de videos (Google Drive, YouTube, etc.)
   imagenes: string[];
   tecnologias: string[];
   githubUrl: string;
@@ -22,12 +24,48 @@ export class ProjectsService {
 
   constructor() { }
 
+  // Helper para convertir URL de Google Drive a formato embebido
+  convertGoogleDriveUrl(url: string): string {
+    // Limpiar parámetros adicionales de la URL
+    const cleanUrl = url.split('?')[0];
+    
+    // Convertir de https://drive.google.com/file/d/ID/view a formato embebido
+    const match = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (match) {
+      const fileId = match[1];
+      return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+    return url; // Si no es formato Google Drive, devolver URL original
+  }
+
   private getInitialProjects(): Project[] {
     return [
       {
         id: '1',
+        nombre: 'Way Combat',
+        descripcion: 'Un juego de combate en 2D desarrollado con Phaser.js que incluye: Múltiples personajes jugables - Diferentes modos de juego: Arcade, Supervivencia - Gráficos pixel art y animaciones fluidas - Sistema de combos y habilidades especiales - Música y efectos de sonido envolventes - Tablas de clasificación en línea',
+        descripcionCorta: 'Juego de combate 2D con Phaser.js. Múltiples personajes, modos de juego y gráficos pixel art.',
+        videos: [
+          'https://drive.google.com/file/d/11QGTADQ8kfa5rnKwQWdFsuNeutpxjjr0/view?usp=sharing'
+        ],
+        imagenes: [
+          '/assets/images/project4-1.jpg',
+          '/assets/images/project4-2.jpg',
+          '/assets/images/project4-3.jpg'
+        ],
+        tecnologias: ['Phaser.js', 'JavaScript', 'HTML5', 'CSS3', 'Pixel Art', 'Game Development'],
+        githubUrl: 'https://github.com/Camilo-Silva/WayCombat.git',
+        hostedUrl: 'https://waycombat-production.up.railway.app/',
+        thumbnailUrl: '/assets/images/project4.png'
+      },
+      {
+        id: '2',
         nombre: 'Spotify Clon',
         descripcion: 'Este proyecto es un clon de Spotify desarrollado con Angular 17.3, que implementa un reproductor de música, gestión de usuarios, historial, favoritos y navegación modular. El objetivo es practicar arquitectura escalable, buenas prácticas y el uso de Angular moderno (standalone components, directivas y pipes. Integración con API deployada en https://api-reproductormusica-production.up.railway.app/ ).',
+        descripcionCorta: 'Clon de Spotify con Angular 17.3. Reproductor de música con gestión de usuarios, favoritos e historial.',
+        videos: [
+          'https://drive.google.com/file/d/1P3iIVv51_hI7S_4CI4pojN5PoWZnADmc/view?usp=sharing'
+        ],
         imagenes: [
           '/assets/images/project1-1.jpg',
           '/assets/images/project1-2.jpg',
@@ -36,12 +74,16 @@ export class ProjectsService {
         tecnologias: ['Angular', 'TypeScript', 'SCSS', 'RxJS', 'Angular Router', 'API REST'],
         githubUrl: 'https://github.com/Camilo-Silva/AppReproductorMusica.git',
         hostedUrl: 'https://spotify-clon-camilo-silva.netlify.app/',
-        thumbnailUrl: '/assets/images/project1.jpg'
+        thumbnailUrl: '/assets/images/project1.png'
       },
       {
-        id: '2',
+        id: '3',
         nombre: 'App de Gestión de Turnos',
         descripcion: 'es un sistema integral de gestión de turnos médicos desarrollado con ASP.NET Core 8.0 MVC. La aplicación facilita la administración de citas médicas, permitiendo la gestión de pacientes, médicos, especialidades, turnos y historiales médicos de manera eficiente y centralizada.',
+        descripcionCorta: 'Sistema de gestión de turnos médicos con ASP.NET Core. Administración completa de citas y pacientes.',
+        videos: [
+          'https://drive.google.com/file/d/1Hg3jxrDwXmmD1Gp6npi6N83S74ji31YX/view?usp=sharing'
+        ],
         imagenes: [
           '/assets/images/project2-1.jpg',
           '/assets/images/project2-2.jpg',
@@ -50,13 +92,17 @@ export class ProjectsService {
         tecnologias: ['ASP.NET Core', 'PostgreSQL (Railway)', 'Entity Framework Core', 'ASP.NET Core Identity', 'MVC con Razor Views', 'Docker'],
         githubUrl: 'https://github.com/Camilo-Silva/TurnoSmart',
         hostedUrl: 'https://turnosmart-production.up.railway.app/',
-        thumbnailUrl: '/assets/images/project2.jpg',
+        thumbnailUrl: '/assets/images/project2.png',
         hasFlowDetails: true // Este proyecto tiene detalles de flujo de app
       },
       {
-        id: '3',
+        id: '4',
         nombre: 'Calculadora Python',
         descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
+        descripcionCorta: 'Calculadora web moderna con Python Flask. Funciones básicas, científicas y historial de cálculos.',
+        videos: [
+          'https://drive.google.com/file/d/1MXfqPyzFrERNddvFfs_WSaBFfJMszziB/view?usp=sharing'
+        ],
         imagenes: [
           '/assets/images/project3-1.jpg',
           '/assets/images/project3-2.jpg',
@@ -65,22 +111,8 @@ export class ProjectsService {
         tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
         githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
         hostedUrl: 'https://calculadorapython-production.up.railway.app/',
-        thumbnailUrl: '/assets/images/project3.jpg'
-      },
-      {
-        id: '4',
-        nombre: 'Way Combat',
-        descripcion: 'Un juego de combate en 2D desarrollado con Phaser.js que incluye: Múltiples personajes jugables - Diferentes modos de juego: Arcade, Supervivencia - Gráficos pixel art y animaciones fluidas - Sistema de combos y habilidades especiales - Música y efectos de sonido envolventes - Tablas de clasificación en línea',
-        imagenes: [
-          '/assets/images/project4-1.jpg',
-          '/assets/images/project4-2.jpg',
-          '/assets/images/project4-3.jpg',
-        ],
-        tecnologias: ['Python', 'Flask', 'JavaScript', 'HTML5', 'CSS3', 'API REST', 'Railway'],
-        githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
-        hostedUrl: 'https://calculadorapython-production.up.railway.app/',
-        thumbnailUrl: '/assets/images/project4.jpg'
-      }
+        thumbnailUrl: '/assets/images/project3.png'
+      }      
 
     ];
   }

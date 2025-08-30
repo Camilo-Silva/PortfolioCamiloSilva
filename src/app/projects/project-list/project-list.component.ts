@@ -79,11 +79,6 @@ export class ProjectListComponent implements AfterViewInit {
     }
   }
 
-  // Función para obtener descripción corta para las cards
-  getShortDescription(description: string): string {
-    return description.length > 120 ? description.substring(0, 120) + '...' : description;
-  }
-
   // Manejadores de eventos de teclado para accesibilidad
   onProjectKeyDown(event: KeyboardEvent, project: Project): void {
     if (event.key === 'Enter' || event.key === ' ') {

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Project } from '../../services/projects.service';
 
 @Component({
@@ -14,24 +15,40 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   @Input() isOpen = false;
   @Output() closeModal = new EventEmitter<void>();
 
-  currentImageIndex = 0;
+  currentMediaIndex = 0;
+  currentMediaType: 'image' | 'video' = 'video'; // Iniciar con video por defecto
+  videoPlaying = false; // Estado para controlar la visibilidad del botón play
   private autoPlayInterval: any;
   private readonly autoPlayDelay = 4000; // 4 segundos entre imágenes
   private isAutoPlayDisabled = false; // Para deshabilitar cuando el usuario interactúa
 
+  constructor(private sanitizer: DomSanitizer) {}
+
   ngOnInit(): void {
-    // El auto-play se iniciará cuando se abra el modal
+    // Inicializar currentMediaIndex y currentMediaType al cargar el componente
+    this.currentMediaIndex = 0;
+    if (this.project?.videos && this.project.videos.length > 0) {
+      this.currentMediaType = 'video';
+    } else if (this.project?.imagenes && this.project.imagenes.length > 0) {
+      this.currentMediaType = 'image';
+    }
   }
 
   ngOnDestroy(): void {
     this.stopAutoPlay();
   }
 
-  // Inicia el auto-play del carrusel
+  // Inicia el auto-play del carrusel (incluye imágenes y videos)
   private startAutoPlay(): void {
-    if (this.project && this.project.imagenes.length > 1 && !this.isAutoPlayDisabled) {
+    // Calcular total de medios disponibles
+    const totalImages = this.project?.imagenes?.length || 0;
+    const totalVideos = this.project?.videos?.length || 0;
+    const totalMedia = totalImages + totalVideos;
+    
+    // Iniciar auto-play si hay más de 1 medio y no está deshabilitado
+    if (this.project && totalMedia > 1 && !this.isAutoPlayDisabled) {
       this.autoPlayInterval = setInterval(() => {
-        this.nextImage();
+        this.nextMediaAutoPlay(); // Navega entre todos los medios
       }, this.autoPlayDelay);
     }
   }
@@ -48,6 +65,13 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   private disableAutoPlay(): void {
     this.isAutoPlayDisabled = true;
     this.stopAutoPlay();
+  }
+
+  // Método para manejar el click en el botón de play del video
+  onVideoPlayClick(): void {
+    // Ocultar el botón de play y deshabilitar autoplay (igual que los cursores)
+    this.videoPlaying = true;
+    this.disableAutoPlay();
   }
 
   // Método para manejar cuando el modal se abre/cierra
@@ -70,40 +94,158 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   onClose(): void {
     this.stopAutoPlay();
     this.closeModal.emit();
-    this.currentImageIndex = 0;
+    this.currentMediaIndex = 0;
+    this.videoPlaying = false; // Resetear estado del video
+    // Resetear al primer tipo disponible (videos tienen prioridad)
+    if (this.project?.videos && this.project.videos.length > 0) {
+      this.currentMediaType = 'video';
+    } else {
+      this.currentMediaType = 'image';
+    }
     this.isAutoPlayDisabled = false; // Resetear estado para la próxima apertura
   }
 
-  previousImage(): void {
-    if (this.project && this.project.imagenes.length > 1) {
-      // Deshabilitar auto-play cuando el usuario navega manualmente
-      this.disableAutoPlay();
-      this.currentImageIndex = 
-        this.currentImageIndex === 0 
-          ? this.project.imagenes.length - 1 
-          : this.currentImageIndex - 1;
-    }
+  // Nuevos métodos para manejar galería de medios (imágenes + videos)
+  getTotalMediaCount(): number {
+    if (!this.project) return 0;
+    const imageCount = this.project.imagenes?.length || 0;
+    const videoCount = this.project.videos?.length || 0;
+    return imageCount + videoCount;
   }
 
-  nextImage(): void {
-    if (this.project && this.project.imagenes.length > 1) {
-      this.currentImageIndex = 
-        this.currentImageIndex === this.project.imagenes.length - 1 
-          ? 0 
-          : this.currentImageIndex + 1;
-    }
-  }
-
-  goToImage(index: number): void {
-    // Deshabilitar auto-play cuando el usuario selecciona una imagen específica
+  previousMedia(): void {
     this.disableAutoPlay();
-    this.currentImageIndex = index;
+    this.videoPlaying = false; // Resetear estado del video al navegar
+    const totalImages = this.project?.imagenes?.length || 0;
+    const totalVideos = this.project?.videos?.length || 0;
+    
+    if (this.currentMediaType === 'image' && this.currentMediaIndex === 0) {
+      // Si estamos en la primera imagen, ir al último video
+      if (totalVideos > 0) {
+        this.currentMediaType = 'video';
+        this.currentMediaIndex = totalVideos - 1;
+      } else {
+        // Si no hay videos, ir a la última imagen
+        this.currentMediaIndex = totalImages - 1;
+      }
+    } else if (this.currentMediaType === 'video' && this.currentMediaIndex === 0) {
+      // Si estamos en el primer video, ir a la última imagen
+      if (totalImages > 0) {
+        this.currentMediaType = 'image';
+        this.currentMediaIndex = totalImages - 1;
+      } else {
+        // Si no hay imágenes, ir al último video
+        this.currentMediaIndex = totalVideos - 1;
+      }
+    } else {
+      // Ir al medio anterior del mismo tipo
+      this.currentMediaIndex--;
+    }
+  }
+
+  nextMedia(): void {
+    this.disableAutoPlay();
+    this.videoPlaying = false; // Resetear estado del video al navegar
+    const totalImages = this.project?.imagenes?.length || 0;
+    const totalVideos = this.project?.videos?.length || 0;
+    
+    if (this.currentMediaType === 'image' && this.currentMediaIndex === totalImages - 1) {
+      // Si estamos en la última imagen, ir al primer video
+      if (totalVideos > 0) {
+        this.currentMediaType = 'video';
+        this.currentMediaIndex = 0;
+      } else {
+        // Si no hay videos, ir a la primera imagen
+        this.currentMediaIndex = 0;
+      }
+    } else if (this.currentMediaType === 'video' && this.currentMediaIndex === totalVideos - 1) {
+      // Si estamos en el último video, ir a la primera imagen
+      if (totalImages > 0) {
+        this.currentMediaType = 'image';
+        this.currentMediaIndex = 0;
+      } else {
+        // Si no hay imágenes, ir al primer video
+        this.currentMediaIndex = 0;
+      }
+    } else {
+      // Ir al siguiente medio del mismo tipo
+      this.currentMediaIndex++;
+    }
+  }
+
+  // Método específico para autoplay - navega entre TODOS los medios (videos primero, luego imágenes) en bucle continuo
+  private nextMediaAutoPlay(): void {
+    const totalImages = this.project?.imagenes?.length || 0;
+    const totalVideos = this.project?.videos?.length || 0;
+    const totalMedia = totalImages + totalVideos;
+    
+    if (totalMedia === 0) return;
+    
+    if (this.currentMediaType === 'image') {
+      if (this.currentMediaIndex === totalImages - 1) {
+        // Si estamos en la última imagen, ir al primer video o volver a primera imagen
+        if (totalVideos > 0) {
+          this.currentMediaType = 'video';
+          this.currentMediaIndex = 0;
+        } else {
+          // Solo hay imágenes, volver a la primera imagen
+          this.currentMediaIndex = 0;
+        }
+      } else {
+        // Ir a la siguiente imagen
+        this.currentMediaIndex++;
+      }
+    } else if (this.currentMediaType === 'video') {
+      if (this.currentMediaIndex === totalVideos - 1) {
+        // Si estamos en el último video, ir a la primera imagen o primer video
+        if (totalImages > 0) {
+          this.currentMediaType = 'image';
+          this.currentMediaIndex = 0;
+        } else {
+          // Solo hay videos, volver al primer video
+          this.currentMediaIndex = 0;
+        }
+      } else {
+        // Ir al siguiente video
+        this.currentMediaIndex++;
+      }
+    }
+  }
+
+  goToMedia(type: 'image' | 'video', index: number): void {
+    this.disableAutoPlay();
+    this.videoPlaying = false; // Resetear estado del video al navegar
+    this.currentMediaType = type;
+    this.currentMediaIndex = index;
+  }
+
+  getEmbedUrl(videoUrl: string): string {
+    // Limpiar parámetros adicionales de la URL
+    const cleanUrl = videoUrl.split('?')[0];
+    
+    // Convertir URL de Google Drive a formato embebido
+    const match = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (match) {
+      const fileId = match[1];
+      // Usar el formato estándar de Google Drive para embedding
+      const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+      return embedUrl;
+    }
+    
+    // Si es YouTube, convertir a formato embebido
+    const youtubeMatch = cleanUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+    if (youtubeMatch) {
+      const videoId = youtubeMatch[1];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    return videoUrl; // Devolver URL original si no se puede convertir
   }
 
   // Método para obtener los usuarios de prueba estructurados
   get testUsers() {
     // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
-    if (!this.project?.hasFlowDetails || this.project.id !== '2') return [];
+    if (!this.project?.hasFlowDetails || this.project.id !== '3') return [];
     
     return [
       {
@@ -186,7 +328,7 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   // Método para obtener los roles estructurados
   get userRoles() {
     // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
-    if (!this.project?.hasFlowDetails || this.project.id !== '2') return [];
+    if (!this.project?.hasFlowDetails || this.project.id !== '3') return [];
     
     return [
       {
@@ -244,7 +386,7 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   // Método para formatear el contenido del flujo como HTML
   getFormattedFlowContent(): string {
     // Solo mostrar para el proyecto de Sistema de Gestión de Turnos
-    if (!this.project?.hasFlowDetails || this.project.id !== '2') {
+    if (!this.project?.hasFlowDetails || this.project.id !== '3') {
       return '';
     }
 
@@ -271,7 +413,7 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   @HostListener('document:keydown.arrowLeft', ['$event'])
   onArrowLeft(event: KeyboardEvent): void {
     if (this.isOpen) {
-      this.previousImage();
+      this.previousMedia();
     }
   }
 
@@ -280,8 +422,14 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     if (this.isOpen) {
       // Deshabilitar auto-play cuando se navega con teclado
       this.disableAutoPlay();
-      this.nextImage();
+      this.nextMedia();
     }
+  }
+
+  // Método para crear URL segura para el iframe
+  getSafeVideoUrl(videoUrl: string): SafeResourceUrl {
+    const embedUrl = this.getEmbedUrl(videoUrl);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }
 
 }

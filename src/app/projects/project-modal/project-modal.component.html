@@ -15,41 +15,82 @@
         <p>{{ project.descripcion }}</p>
       </div>
 
-      <!-- Galería de imágenes -->
-      <div class="image-gallery">
+      <!-- Galería de imágenes y videos -->
+      <div class="media-gallery">
         <div class="gallery-container">
+          <!-- Imágenes -->
           <div 
             *ngFor="let imagen of project.imagenes; let i = index"
             class="gallery-slide"
-            [class.active]="i === currentImageIndex">
-            <img [src]="imagen" [alt]="project.nombre + ' - Imagen ' + (i + 1)" />
+            [class.active]="i === currentMediaIndex && currentMediaType === 'image'">
+            <img [src]="imagen" [alt]="project.nombre + ' - Captura ' + (i + 1)" />
+          </div>
+          
+          <!-- Videos -->
+          <div 
+            *ngFor="let video of project.videos; let i = index"
+            class="gallery-slide video-slide"
+            [class.active]="i === currentMediaIndex && currentMediaType === 'video'">
+            
+            <!-- Reproductor de video embebido -->
+            <div class="video-container">
+              <!-- Botón invisible que cubre todo el video -->
+              <button 
+                class="invisible-video-button"
+                (click)="onVideoPlayClick()"
+                [class.hidden]="videoPlaying"
+                aria-label="Reproducir video">
+              </button>
+              
+              <iframe 
+                [src]="getSafeVideoUrl(video)" 
+                [title]="project.nombre + ' - Demo ' + (i + 1)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                sandbox="allow-same-origin allow-scripts allow-presentation allow-forms"
+                class="video-iframe">
+              </iframe>
+            </div>
           </div>
         </div>
         
         <!-- Controles de navegación -->
-        <div class="gallery-controls" *ngIf="project.imagenes.length > 1">
+        <div class="gallery-controls" *ngIf="getTotalMediaCount() > 1">
           <button 
             class="gallery-btn prev" 
-            (click)="previousImage()"
-            aria-label="Imagen anterior">
+            (click)="previousMedia()"
+            aria-label="Medio anterior">
             ‹
           </button>
           <button 
             class="gallery-btn next" 
-            (click)="nextImage()"
-            aria-label="Siguiente imagen">
+            (click)="nextMedia()"
+            aria-label="Siguiente medio">
             ›
           </button>
         </div>
 
         <!-- Indicadores -->
-        <div class="gallery-indicators" *ngIf="project.imagenes.length > 1">
+        <div class="gallery-indicators" *ngIf="getTotalMediaCount() > 1">
+          <!-- Indicadores para videos (PRIMERO) -->
+          <button
+            *ngFor="let video of project.videos; let i = index"
+            class="indicator video-indicator"
+            [class.active]="i === currentMediaIndex && currentMediaType === 'video'"
+            (click)="goToMedia('video', i)"
+            [attr.aria-label]="'Ir a video ' + (i + 1)">
+            
+          </button>
+          
+          <!-- Indicadores para imágenes (DESPUÉS) -->
           <button
             *ngFor="let imagen of project.imagenes; let i = index"
-            class="indicator"
-            [class.active]="i === currentImageIndex"
-            (click)="goToImage(i)"
+            class="indicator image-indicator"
+            [class.active]="i === currentMediaIndex && currentMediaType === 'image'"
+            (click)="goToMedia('image', i)"
             [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+            
           </button>
         </div>
       </div>
