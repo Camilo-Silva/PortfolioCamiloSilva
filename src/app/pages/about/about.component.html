@@ -4,9 +4,7 @@
     <header class="about-header">
       <h1 class="section-title">Acerca de Mí</h1>
       <p class="section-description">
-        Soy Analista de Sistemas y Funcional, con una sólida formación en el análisis y diseño de soluciones de software. 
-        Mi pasión por el desarrollo Full Stack se refleja en mi portafolio de proyectos, donde aplico mis conocimientos     
-        y estoy listo para aportar una mirada integral, que abarca desde la idea inicial hasta la implementación del código.
+        Soy un analista de sistemas con una pasión por el desarrollo Full Stack. Mi objetivo es crear soluciones de software eficientes, abarcando desde el diseño conceptual hasta la implementación de código
       </p>
     </header>
 
@@ -18,8 +16,7 @@
           <h2>Camilo Silva</h2>
           <p class="profile-title">Analista de Sistemas | Desarrollador Full Stack</p>
           <p class="profile-description">
-            Profesional apasionado por la tecnología con experiencia en desarrollo de software
-            y análisis funcional. Especializado en crear soluciones eficientes y escalables
+            Profesional apasionado por la tecnología con experiencia en desarrollo de software. Especializado en crear soluciones eficientes y escalables
             que transforman ideas en aplicaciones funcionales.
           </p>
         </div>
@@ -29,18 +26,21 @@
           <h3>Curriculum Vitae</h3>
           <div class="cv-preview">
             <div class="cv-thumbnail">
-              <p>CV</p>
+              <img src="assets/images/cami-silva-nobg.png" alt="Foto de perfil de Camilo Silva" class="cv-photo">
+              <div class="cv-overlay">
+                <p>Camilo Silva</p>
+              </div>
             </div>
             <div class="cv-actions">
-              <button class="btn btn-primary" (click)="downloadCV('pdf')" [disabled]="isDownloading"
+              <button class="btn btn-primary" (click)="openCV('pdf')" [disabled]="isDownloading"
                 [class.loading]="isDownloading">
-                <span *ngIf="!isDownloading">📄 Descargar PDF</span>
-                <span *ngIf="isDownloading">⏳ Descargando...</span>
+                <span *ngIf="!isDownloading"> Ver PDF</span>
+                <span *ngIf="isDownloading"> Cargando...</span>
               </button>
-              <button class="btn btn-outline" (click)="downloadCV('jpg')" [disabled]="isDownloading"
+              <button class="btn btn-outline" (click)="downloadCV('pdf')" [disabled]="isDownloading"
                 [class.loading]="isDownloading">
-                <span *ngIf="!isDownloading">🖼️ Descargar JPG</span>
-                <span *ngIf="isDownloading">⏳ Descargando...</span>
+                <span *ngIf="!isDownloading"> Descargar PDF</span>
+                <span *ngIf="isDownloading"> Descargando...</span>
               </button>
             </div>
             <!-- Mensaje de feedback -->
@@ -65,8 +65,7 @@
               <p class="period">2020 - Presente</p>
               <ul class="responsibilities">
                 <li>Análisis y diseño de requerimientos funcionales</li>
-                <li>Análisis y diseño de interfaces entre sistemas. Rediseño de
-                  aplicaciones existentes.</li>
+                <li>Análisis y diseño de interfaces entre sistemas. Rediseño de aplicaciones existentes.</li>
                 <li>Documentación de procesos y especificaciones</li>
                 <li>Gestión de proyectos de desarrollo de software</li>
               </ul>
@@ -93,13 +92,13 @@
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <h3>Project Lead</h3>
-              <p class="company">Zoo Logic <S class="A"></S></p>
+              <p class="company">Zoo Logic S.A.</p>
               <p class="period">2016 - 2020</p>
               <ul class="responsibilities">
                 <li>Colaboración permanente con el cliente</li>
-                <li>Planificación de las distintas fases del proyecto.</li>
-                <li>Dirección y coordinación de recursos.</li>
-                <li>Gestión de las relaciones externas del proyecto.</li>
+                <li>Planificación de las distintas fases del proyecto</li>
+                <li>Dirección y coordinación de recursos</li>
+                <li>Gestión de las relaciones externas del proyecto</li>
               </ul>
             </div>
           </div>
@@ -108,7 +107,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <h3>Implementador de Software</h3>
-              <p class="company">Zoo Logic <S class="A"></S></p>
+              <p class="company">Zoo Logic S.A.</p>
               <p class="period">2013 - 2016</p>
               <ul class="responsibilities">
                 <li>Colaboración permanente con el cliente</li>
@@ -153,12 +152,10 @@
             <h3>Frontend</h3>
             <div class="skills-list">
               <span class="skill-tag">Angular</span>
-              <!-- <span class="skill-tag">React</span> -->
               <span class="skill-tag">TypeScript</span>
               <span class="skill-tag">JavaScript</span>
               <span class="skill-tag">HTML5</span>
               <span class="skill-tag">CSS3 - SCSS</span>
-              <!-- <span class="skill-tag">SCSS</span> -->
             </div>
           </div>
 
@@ -169,7 +166,6 @@
               <span class="skill-tag">Express</span>
               <span class="skill-tag">ASP.NET Core</span>
               <span class="skill-tag">Python</span>
-              <!-- <span class="skill-tag">Java</span> -->
               <span class="skill-tag">C#</span>
             </div>
           </div>
@@ -180,7 +176,6 @@
               <span class="skill-tag">PostgreSQL</span>
               <span class="skill-tag">MySQL</span>
               <span class="skill-tag">MongoDB</span>
-              <!-- <span class="skill-tag">Redis</span> -->
               <span class="skill-tag">SQL Server</span>
             </div>
           </div>

@@ -12,6 +12,60 @@ export class AboutComponent {
   isDownloading = false; // Para mostrar estado de descarga
   downloadMessage = ''; // Para mostrar mensajes de feedback
 
+  // Método para abrir CV en nueva pestaña
+  openCV(format: 'pdf' | 'jpg'): void {
+    if (this.isDownloading) {
+      return; // Evitar múltiples operaciones simultáneas
+    }
+    
+    this.isDownloading = true;
+    this.downloadMessage = '';
+    const fileName = format === 'pdf' ? 'CV.pdf' : 'CV.jpg';
+    const filePath = `/assets/images/${fileName}`;
+    
+    try {
+      // Verificar si el archivo existe antes de intentar abrirlo
+      this.checkFileExists(filePath).then(exists => {
+        if (exists) {
+          // Abrir en nueva pestaña
+          window.open(filePath, '_blank');
+          
+          // Mostrar mensaje de éxito
+          this.downloadMessage = `✅ CV abierto en nueva pestaña`;
+          console.log(`CV en formato ${format.toUpperCase()} abierto en nueva pestaña`);
+          
+          // Limpiar mensaje después de 3 segundos
+          setTimeout(() => {
+            this.downloadMessage = '';
+          }, 3000);
+          
+        } else {
+          throw new Error(`El archivo ${fileName} no se encuentra disponible`);
+        }
+      }).catch(error => {
+        console.error('Error al abrir el archivo:', error);
+        this.downloadMessage = `❌ Error: ${error.message || 'No se pudo abrir el archivo'}`;
+        
+        // Limpiar mensaje después de 5 segundos
+        setTimeout(() => {
+          this.downloadMessage = '';
+        }, 5000);
+      }).finally(() => {
+        this.isDownloading = false;
+      });
+      
+    } catch (error) {
+      console.error('Error al abrir el archivo:', error);
+      this.downloadMessage = `❌ Error al abrir el CV en formato ${format.toUpperCase()}`;
+      this.isDownloading = false;
+      
+      // Limpiar mensaje después de 5 segundos
+      setTimeout(() => {
+        this.downloadMessage = '';
+      }, 5000);
+    }
+  }
+
   downloadCV(format: 'pdf' | 'jpg'): void {
     if (this.isDownloading) {
       return; // Evitar múltiples descargas simultáneas
