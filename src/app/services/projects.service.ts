@@ -43,8 +43,8 @@ export class ProjectsService {
       {
         id: '1',
         nombre: 'Way Combat',
-        descripcion: 'Un juego de combate en 2D desarrollado con Phaser.js que incluye: Múltiples personajes jugables - Diferentes modos de juego: Arcade, Supervivencia - Gráficos pixel art y animaciones fluidas - Sistema de combos y habilidades especiales - Música y efectos de sonido envolventes - Tablas de clasificación en línea',
-        descripcionCorta: 'Juego de combate 2D con Phaser.js. Múltiples personajes, modos de juego y gráficos pixel art.',
+        descripcion: 'Desarrollada como una plataforma web robusta para el fitness de combate. El backend fue implementado con ASP.NET Core, manejando eficientemente el registro de usuarios y la distribución de los mixes de entrenamiento. El frontend, creado con Angular, proporciona una experiencia de usuario fluida y reactiva para navegar y disfrutar de las rutinas.',
+        descripcionCorta: 'Aplicación web dedicada al fitness de combate, donde los usuarios pueden registrarse para adquirir una variedad de mixes de entrenamiento.',
         videos: [
           'https://drive.google.com/file/d/11QGTADQ8kfa5rnKwQWdFsuNeutpxjjr0/view?usp=sharing'
         ],

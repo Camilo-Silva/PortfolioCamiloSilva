@@ -263,6 +263,9 @@
     }
     
     .carousel-container {
+      // Añadir padding derecho para tablets
+      padding-right: 40px;
+      
       .carousel-track {
         gap: 16px;
         
@@ -313,6 +316,9 @@
     }
     
     .carousel-container {
+      // Añadir padding derecho para asegurar que la última card sea visible
+      padding-right: 20px;
+      
       .carousel-track {
         gap: 12px;
         

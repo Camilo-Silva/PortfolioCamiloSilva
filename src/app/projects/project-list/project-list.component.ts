@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Project } from '../../services/projects.service';
 
@@ -19,6 +19,12 @@ export class ProjectListComponent implements AfterViewInit {
   currentIndex = 0;
   itemsPerView = 3; // Número de cards visibles por defecto
   
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.updateItemsPerView();
+    this.updateCarouselPosition();
+  }
+  
   get maxIndex(): number {
     return Math.max(0, this.projects.length - this.itemsPerView);
   }
@@ -31,8 +37,41 @@ export class ProjectListComponent implements AfterViewInit {
     return this.currentIndex < this.maxIndex;
   }
 
+  private getCardWidth(): number {
+    const windowWidth = window.innerWidth;
+    
+    if (windowWidth <= 480) {
+      // Móvil pequeño: 240px card + 12px gap
+      return 252;
+    } else if (windowWidth <= 768) {
+      // Tablet: 260px card + 16px gap
+      return 276;
+    } else {
+      // Desktop: 300px card + 20px gap
+      return 320;
+    }
+  }
+
+  private updateItemsPerView(): void {
+    const windowWidth = window.innerWidth;
+    
+    if (windowWidth <= 480) {
+      this.itemsPerView = 1; // Móvil: 1 card visible
+    } else if (windowWidth <= 768) {
+      this.itemsPerView = 2; // Tablet: 2 cards visibles
+    } else {
+      this.itemsPerView = 3; // Desktop: 3 cards visibles
+    }
+    
+    // Ajustar currentIndex si está fuera del rango válido
+    if (this.currentIndex > this.maxIndex) {
+      this.currentIndex = this.maxIndex;
+    }
+  }
+
   ngAfterViewInit(): void {
     // Inicializar la posición del carrusel después de que la vista esté lista
+    this.updateItemsPerView();
     setTimeout(() => {
       this.updateCarouselPosition();
     }, 0);
@@ -70,7 +109,7 @@ export class ProjectListComponent implements AfterViewInit {
 
   updateCarouselPosition(): void {
     if (this.carousel) {
-      const cardWidth = 320; // Ancho de cada card + gap
+      const cardWidth = this.getCardWidth();
       const translateX = -this.currentIndex * cardWidth;
       const carouselTrack = this.carousel.nativeElement.querySelector('.carousel-track');
       if (carouselTrack) {
