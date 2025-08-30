@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Project } from '../../services/projects.service';
 
 @Component({
@@ -19,10 +19,14 @@ export class ProjectListComponent implements AfterViewInit {
   currentIndex = 0;
   itemsPerView = 3; // Número de cards visibles por defecto
   
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    this.updateItemsPerView();
-    this.updateCarouselPosition();
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateItemsPerView();
+      this.updateCarouselPosition();
+    }
   }
   
   get maxIndex(): number {
@@ -38,6 +42,12 @@ export class ProjectListComponent implements AfterViewInit {
   }
 
   private getCardWidth(): number {
+    // Verificar si estamos en el navegador antes de acceder a window
+    if (!isPlatformBrowser(this.platformId)) {
+      // Valor por defecto para SSR (desktop)
+      return 320;
+    }
+    
     const windowWidth = window.innerWidth;
     
     if (windowWidth <= 480) {
@@ -53,6 +63,13 @@ export class ProjectListComponent implements AfterViewInit {
   }
 
   private updateItemsPerView(): void {
+    // Verificar si estamos en el navegador antes de acceder a window
+    if (!isPlatformBrowser(this.platformId)) {
+      // Valor por defecto para SSR (desktop)
+      this.itemsPerView = 3;
+      return;
+    }
+    
     const windowWidth = window.innerWidth;
     
     if (windowWidth <= 480) {
@@ -71,10 +88,12 @@ export class ProjectListComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // Inicializar la posición del carrusel después de que la vista esté lista
-    this.updateItemsPerView();
-    setTimeout(() => {
-      this.updateCarouselPosition();
-    }, 0);
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateItemsPerView();
+      setTimeout(() => {
+        this.updateCarouselPosition();
+      }, 0);
+    }
   }
 
   onProjectHover(project: Project): void {

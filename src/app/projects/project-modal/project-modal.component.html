@@ -34,21 +34,12 @@
             
             <!-- Reproductor de video embebido -->
             <div class="video-container">
-              <!-- Botón invisible que cubre todo el video -->
-              <button 
-                class="invisible-video-button"
-                (click)="onVideoPlayClick()"
-                [class.hidden]="videoPlaying"
-                aria-label="Reproducir video">
-              </button>
-              
               <iframe 
-                [src]="getSafeVideoUrl(video)" 
+                [src]="getSafeVideoUrlByIndex(i)" 
                 [title]="project.nombre + ' - Demo ' + (i + 1)"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
                 allowfullscreen
                 referrerpolicy="no-referrer-when-downgrade"
-                sandbox="allow-same-origin allow-scripts allow-presentation allow-forms"
                 class="video-iframe">
               </iframe>
             </div>

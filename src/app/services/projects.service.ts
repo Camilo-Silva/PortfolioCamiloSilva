@@ -46,7 +46,7 @@ export class ProjectsService {
         descripcion: 'Desarrollada como una plataforma web robusta para el fitness de combate. El backend fue implementado con ASP.NET Core, manejando eficientemente el registro de usuarios y la distribución de los mixes de entrenamiento. El frontend, creado con Angular, proporciona una experiencia de usuario fluida y reactiva para navegar y disfrutar de las rutinas.',
         descripcionCorta: 'Aplicación web dedicada al fitness de combate, donde los usuarios pueden registrarse para adquirir una variedad de mixes de entrenamiento.',
         videos: [
-          'https://drive.google.com/file/d/11QGTADQ8kfa5rnKwQWdFsuNeutpxjjr0/view?usp=sharing'
+          'https://drive.google.com/file/d/1tCO456HFhG2kv_CD8Fs8RawcNT2NAGo5/view?usp=sharing'
         ],
         imagenes: [
           '/assets/images/project4-1.jpg',

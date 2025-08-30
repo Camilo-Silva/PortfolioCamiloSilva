@@ -17,10 +17,12 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   currentMediaIndex = 0;
   currentMediaType: 'image' | 'video' = 'video'; // Iniciar con video por defecto
-  videoPlaying = false; // Estado para controlar la visibilidad del botón play
   private autoPlayInterval: any;
   private readonly autoPlayDelay = 4000; // 4 segundos entre imágenes
   private isAutoPlayDisabled = false; // Para deshabilitar cuando el usuario interactúa
+  
+  // Cache para URLs de video seguras
+  private safeVideoUrls: SafeResourceUrl[] = [];
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -38,7 +40,7 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     this.stopAutoPlay();
   }
 
-  // Inicia el auto-play del carrusel (incluye imágenes y videos)
+  // Inicia el auto-play del carrusel
   private startAutoPlay(): void {
     // Calcular total de medios disponibles
     const totalImages = this.project?.imagenes?.length || 0;
@@ -67,18 +69,23 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     this.stopAutoPlay();
   }
 
-  // Método para manejar el click en el botón de play del video
-  onVideoPlayClick(): void {
-    // Ocultar el botón de play y deshabilitar autoplay (igual que los cursores)
-    this.videoPlaying = true;
-    this.disableAutoPlay();
-  }
-
   // Método para manejar cuando el modal se abre/cierra
   ngOnChanges(): void {
-    if (this.isOpen && this.project && this.project.imagenes.length > 1) {
-      // Iniciar auto-play cuando se abre el modal
-      setTimeout(() => this.startAutoPlay(), 1000); // Esperar 1 segundo antes de iniciar
+    // Crear URLs seguras cuando cambia el proyecto
+    if (this.project && this.project.videos) {
+      this.safeVideoUrls = this.project.videos.map(video => {
+        const embedUrl = this.getEmbedUrl(video);
+        return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+      });
+    }
+    
+    if (this.isOpen && this.project) {
+      const totalImages = this.project.imagenes?.length || 0;
+      
+      // Solo iniciar autoplay si hay más de 1 imagen
+      if (totalImages > 1) {
+        setTimeout(() => this.startAutoPlay(), 1000);
+      }
     } else {
       // Detener auto-play cuando se cierra el modal
       this.stopAutoPlay();
@@ -95,7 +102,6 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     this.stopAutoPlay();
     this.closeModal.emit();
     this.currentMediaIndex = 0;
-    this.videoPlaying = false; // Resetear estado del video
     // Resetear al primer tipo disponible (videos tienen prioridad)
     if (this.project?.videos && this.project.videos.length > 0) {
       this.currentMediaType = 'video';
@@ -115,7 +121,6 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   previousMedia(): void {
     this.disableAutoPlay();
-    this.videoPlaying = false; // Resetear estado del video al navegar
     const totalImages = this.project?.imagenes?.length || 0;
     const totalVideos = this.project?.videos?.length || 0;
     
@@ -145,7 +150,6 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   nextMedia(): void {
     this.disableAutoPlay();
-    this.videoPlaying = false; // Resetear estado del video al navegar
     const totalImages = this.project?.imagenes?.length || 0;
     const totalVideos = this.project?.videos?.length || 0;
     
@@ -214,7 +218,6 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
 
   goToMedia(type: 'image' | 'video', index: number): void {
     this.disableAutoPlay();
-    this.videoPlaying = false; // Resetear estado del video al navegar
     this.currentMediaType = type;
     this.currentMediaIndex = index;
   }
@@ -227,7 +230,7 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     const match = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
     if (match) {
       const fileId = match[1];
-      // Usar el formato estándar de Google Drive para embedding
+      // Volver al formato preview que funcionaba
       const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
       return embedUrl;
     }
@@ -410,6 +413,16 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  @HostListener('document:fullscreenchange', ['$event'])
+  onFullscreenChange(event: Event): void {
+    console.log('Fullscreen change detected', {
+      isFullscreen: !!document.fullscreenElement,
+      currentMediaType: this.currentMediaType,
+      currentMediaIndex: this.currentMediaIndex
+    });
+    // NO hacer nada aquí - dejar que funcione normalmente
+  }
+
   @HostListener('document:keydown.arrowLeft', ['$event'])
   onArrowLeft(event: KeyboardEvent): void {
     if (this.isOpen) {
@@ -430,6 +443,11 @@ export class ProjectModalComponent implements OnInit, OnDestroy, OnChanges {
   getSafeVideoUrl(videoUrl: string): SafeResourceUrl {
     const embedUrl = this.getEmbedUrl(videoUrl);
     return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  // Método optimizado para obtener URL segura por índice (evita recrear URLs)
+  getSafeVideoUrlByIndex(index: number): SafeResourceUrl {
+    return this.safeVideoUrls[index] || this.getSafeVideoUrl(this.project?.videos?.[index] || '');
   }
 
 }
