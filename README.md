@@ -79,12 +79,12 @@ src/
 │   │   ├── header/           # Navegación principal
 │   │   ├── logo/             # Componente del logo
 │   │   └── menu-overlay/     # Menu móvil
-│   ├── services/             # Servicios de la aplicación
-│   │   ├── theme.service.ts  # Gestión de temas
-│   │   └── projects.service.ts # Gestión de proyectos
-│   └── contact/              # Módulo de contacto
-│       ├── contact-form/     # Formulario de contacto
-│       └── social-links/     # Enlaces sociales
+│   └── services/             # Servicios de la aplicación
+│       ├── theme.service.ts  # Gestión de temas
+│       └── projects.service.ts # Gestión de proyectos
+│   
+│   
+│   
 ├── assets/                   # Recursos estáticos
 │   └── images/               # Imágenes del portfolio
 └── styles.scss              # Estilos globales y variables CSS
