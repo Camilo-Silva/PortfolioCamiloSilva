@@ -240,14 +240,13 @@ app-about,
 app-projects,
 app-contact {
   display: block;
-  margin: 0;
+  margin: 0 auto; // Centrar horizontalmente
   padding: 0;
   box-sizing: border-box;
   position: relative;
   height: 100vh; // Altura fija del viewport
   overflow: hidden; // Ocultar el scroll principal
   max-width:  1500px; // Ancho máximo para mantener el contenido centrado
-  margin: 0 auto; // Centrar horizontalmente
 
 }
 

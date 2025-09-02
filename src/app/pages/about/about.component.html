@@ -37,11 +37,6 @@
                 <span *ngIf="!isDownloading"> Ver PDF</span>
                 <span *ngIf="isDownloading"> Cargando...</span>
               </button>
-              <button class="btn btn-outline" (click)="downloadCV('pdf')" [disabled]="isDownloading"
-                [class.loading]="isDownloading">
-                <span *ngIf="!isDownloading"> Descargar PDF</span>
-                <span *ngIf="isDownloading"> Descargando...</span>
-              </button>
             </div>
             <!-- Mensaje de feedback -->
             <div class="download-feedback" *ngIf="downloadMessage">

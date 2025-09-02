@@ -8,7 +8,7 @@
       <!-- Theme toggle -->
       <button 
         class="theme-toggle" 
-        (click)="toggleTheme()"
+        (click)="toggleTheme($event)"
         [attr.aria-label]="'Cambiar a tema ' + (isDarkTheme ? 'claro' : 'oscuro')"
         title="Cambiar tema">
         <img 
