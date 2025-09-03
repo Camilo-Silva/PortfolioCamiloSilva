@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, AfterViewInit, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-about',
@@ -8,9 +8,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit, AfterViewInit {
   isDownloading = false; // Para mostrar estado de descarga
   downloadMessage = ''; // Para mostrar mensajes de feedback
+
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  ngOnInit(): void {
+    // Inicialización del componente
+  }
+
+  ngAfterViewInit(): void {
+    // Solo ejecutar en el navegador
+    if (isPlatformBrowser(this.platformId)) {
+      this.initializeSkillsFilter();
+      this.animateSkillsOnScroll();
+    }
+  }
 
   // Método para abrir CV en nueva pestaña
   openCV(format: 'pdf' | 'jpg'): void {
@@ -140,5 +157,89 @@ export class AboutComponent {
     } catch {
       return false;
     }
+  }
+
+  // Inicializar filtros de habilidades
+  private initializeSkillsFilter(): void {
+    const filterButtons = this.elementRef.nativeElement.querySelectorAll('.filter-btn');
+    const skillItems = this.elementRef.nativeElement.querySelectorAll('.skill-item');
+
+    filterButtons.forEach((button: HTMLElement) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remover clase active de todos los botones
+        filterButtons.forEach((btn: HTMLElement) => btn.classList.remove('active'));
+        
+        // Agregar clase active al botón clickeado
+        button.classList.add('active');
+        
+        const filter = button.getAttribute('data-filter');
+        
+        // Filtrar elementos
+        skillItems.forEach((item: HTMLElement) => {
+          const category = item.getAttribute('data-category');
+          
+          if (filter === 'all' || category === filter) {
+            item.style.display = 'flex';
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.8)';
+            
+            // Animar entrada
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            }, 100);
+          } else {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  // Animar habilidades cuando entran en el viewport
+  private animateSkillsOnScroll(): void {
+    // Solo ejecutar en el navegador
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const skillItem = entry.target as HTMLElement;
+          const levelBar = skillItem.querySelector('.skill-level') as HTMLElement;
+          const level = levelBar?.getAttribute('data-level');
+          
+          // Animar barra de nivel
+          if (levelBar && level) {
+            setTimeout(() => {
+              levelBar.style.width = `${level}%`;
+            }, 200);
+          }
+          
+          // Agregar clase de animación
+          skillItem.classList.add('animate-in');
+          
+          // Dejar de observar este elemento
+          observer.unobserve(skillItem);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observar todos los skill items
+    const skillItems = this.elementRef.nativeElement.querySelectorAll('.skill-item');
+    skillItems.forEach((item: HTMLElement) => {
+      observer.observe(item);
+    });
   }
 }
