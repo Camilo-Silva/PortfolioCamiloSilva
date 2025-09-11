@@ -44,7 +44,7 @@ export class ProjectsService {
         id: '1',
         nombre: 'Way Combat',
         descripcion: 'Desarrollada como una plataforma web robusta para el fitness de combate. El backend fue implementado con ASP.NET Core, manejando eficientemente el registro de usuarios y la distribución de los mixes de entrenamiento. El frontend, creado con Angular, proporciona una experiencia de usuario fluida y reactiva para navegar y disfrutar de las rutinas.',
-        descripcionCorta: 'Aplicación web dedicada al fitness de combate, donde los usuarios pueden registrarse para adquirir una variedad de mixes de entrenamiento.',
+        descripcionCorta: 'Aplicación web de fitness de combate, donde usuarios pueden adquirir una variedad de mixes de entrenamiento.',
         videos: [
           'https://drive.google.com/file/d/1tCO456HFhG2kv_CD8Fs8RawcNT2NAGo5/view?usp=sharing'
         ],
@@ -53,7 +53,7 @@ export class ProjectsService {
           '/assets/images/project4-2.jpg',
           '/assets/images/project4-3.jpg'
         ],
-        tecnologias: ['Phaser.js', 'JavaScript', 'HTML5', 'CSS3', 'Pixel Art', 'Game Development'],
+        tecnologias: ['Angular', 'JavaScript', 'HTML5', 'CSS3', 'TypeScript', 'API REST', 'ASP.NET Core', 'Entity Framework Core', 'SQL Server'],
         githubUrl: 'https://github.com/Camilo-Silva/WayCombat.git',
         hostedUrl: 'https://waycombat-production.up.railway.app/',
         thumbnailUrl: '/assets/images/project4.png'
