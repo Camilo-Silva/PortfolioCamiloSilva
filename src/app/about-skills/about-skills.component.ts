@@ -36,13 +36,12 @@ export class AboutSkillsComponent implements AfterViewInit {
         filterButtons.forEach((btn: HTMLElement) => btn.classList.remove('active'));
         button.classList.add('active');
 
-        // Scroll automático al título de habilidades
+        // Scroll automático al título - usando CSS scroll-margin-top
         const skillsTitle = this.elementRef.nativeElement.querySelector('#skills-title');
         if (skillsTitle) {
           skillsTitle.scrollIntoView({ 
             behavior: 'smooth', 
-            block: 'start',
-            inline: 'nearest'
+            block: 'start'
           });
         }
 

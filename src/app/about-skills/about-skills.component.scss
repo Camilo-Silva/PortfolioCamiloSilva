@@ -6,6 +6,11 @@
     margin-bottom: var(--spacing-xl);
     text-align: center;
     color: var(--text-primary);
+    scroll-margin-top: 100px; // Offset automático para scroll en móvil
+    
+    @media (min-width: 769px) {
+      scroll-margin-top: 100px; // Offset mayor para desktop
+    }
   }
 
   .skills-filters {
