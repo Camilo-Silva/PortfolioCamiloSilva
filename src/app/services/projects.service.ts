@@ -55,7 +55,7 @@ export class ProjectsService {
         ],
         tecnologias: ['Angular', 'JavaScript', 'HTML5', 'CSS3', 'TypeScript', 'API REST', 'ASP.NET Core', 'Entity Framework Core', 'SQL Server'],
         githubUrl: 'https://github.com/Camilo-Silva/WayCombat.git',
-        hostedUrl: 'https://waycombat-production.up.railway.app/',
+        hostedUrl: 'https://waycombat.netlify.app/',
         thumbnailUrl: '/assets/images/project4.png'
       },
       {
