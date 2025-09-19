@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { LogoComponent } from '../logo/logo.component';
 import { NavbarToggleComponent } from '../navbar-toggle/navbar-toggle.component';
@@ -8,7 +9,7 @@ import { MenuOverlayComponent } from '../menu-overlay/menu-overlay.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LogoComponent, NavbarToggleComponent, MenuOverlayComponent],
+  imports: [LogoComponent, NavbarToggleComponent, MenuOverlayComponent, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

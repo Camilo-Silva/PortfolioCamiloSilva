@@ -3,6 +3,32 @@
     <!-- Logo -->
     <app-logo></app-logo>
     
+    <!-- Desktop Navigation (hidden on mobile) -->
+    <nav class="desktop-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <span class="nav-text">INICIO</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/proyectos" class="nav-link" routerLinkActive="active">
+            <span class="nav-text">PROYECTOS</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/acerca-de" class="nav-link" routerLinkActive="active">
+            <span class="nav-text">ACERCA DE</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contacto" class="nav-link" routerLinkActive="active">
+            <span class="nav-text">CONTACTO</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
     <!-- Right side controls -->
     <div class="header-controls">
       <!-- Theme toggle -->
@@ -18,8 +44,9 @@
           [alt]="isDarkTheme ? 'Icono de sol' : 'Icono de luna'">
       </button>
       
-      <!-- Menu toggle -->
+      <!-- Menu toggle (only visible on mobile) -->
       <app-navbar-toggle 
+        class="mobile-menu-toggle"
         [isMenuOpen]="isMenuOpen"
         (menuToggle)="toggleMenu()">
       </app-navbar-toggle>
