@@ -1,0 +1,42 @@
+<!-- 📱 WhatsApp Float Button - Senior Level Implementation -->
+<div 
+  class="whatsapp-float-container" 
+  [@fadeInOut]
+  *ngIf="isVisible"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()">
+  
+  <!-- Tooltip -->
+  <div 
+    class="whatsapp-tooltip" 
+    [class.show]="showTooltip"
+    [@fadeInOut]>
+    <span class="tooltip-text">¿Tienes alguna pregunta?</span>
+    <span class="tooltip-cta">¡Chatea conmigo!</span>
+  </div>
+  
+  <!-- Main Button -->
+  <button 
+    class="whatsapp-button"
+    [@pulse]="pulseState"
+    (click)="openWhatsApp()"
+    [attr.aria-label]="'Abrir chat de WhatsApp con +56 9 3197 2805'"
+    title="Contactar por WhatsApp">
+    
+    <!-- WhatsApp Icon SVG -->
+    <svg 
+      class="whatsapp-icon" 
+      viewBox="0 0 32 32" 
+      xmlns="http://www.w3.org/2000/svg">
+      <path 
+        fill="currentColor" 
+        d="M16 0C7.164 0 0 7.164 0 16c0 2.843.753 5.505 2.065 7.817L0 32l8.366-2.195A15.924 15.924 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm9.28 22.665c-.391.98-2.267 1.967-3.178 2.074-.826.091-1.859.147-3.002-.188-.694-.203-1.584-.473-2.722-.926-4.762-2.007-7.873-6.821-8.112-7.135-.239-.315-1.948-2.598-1.948-4.954s1.238-3.516 1.677-3.997c.44-.481.959-.602 1.279-.602.321 0 .641.002.922.017.296.014.692-.112 1.082.825.391.937 1.335 3.253 1.451 3.491.117.238.195.515.039.83-.156.315-.234.515-.469.796-.234.281-.493.628-.704.842-.234.235-.478.488-.206.958.273.47 1.215 2.005 2.61 3.247 1.794 1.597 3.305 2.095 3.774 2.33.469.235.744.196.996-.117.252-.313 1.082-1.258 1.372-1.693.29-.435.577-.362 1.001-.195.424.167 2.692 1.27 3.161 1.503.469.234.782.352.899.547.117.195.117 1.128-.274 2.22z"/>
+    </svg>
+    
+    <!-- Notification Dot (pulse indicator) -->
+    <span class="notification-dot"></span>
+  </button>
+  
+  <!-- Ripple Effect -->
+  <span class="ripple-effect"></span>
+</div>

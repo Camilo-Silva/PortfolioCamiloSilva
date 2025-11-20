@@ -17,7 +17,7 @@ export class ThemeService {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
+
       const theme = savedTheme || (prefersDark ? 'dark' : 'light');
       this.setTheme(theme);
     }
@@ -25,7 +25,7 @@ export class ThemeService {
 
   setTheme(theme: 'light' | 'dark'): void {
     this.currentTheme.next(theme);
-    
+
     if (isPlatformBrowser(this.platformId)) {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);

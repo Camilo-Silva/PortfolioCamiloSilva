@@ -23,8 +23,8 @@ export class MenuOverlayComponent {
     this.closeMenu.emit();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent): void {
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
     if (this.isOpen) {
       this.closeMenu.emit();
     }

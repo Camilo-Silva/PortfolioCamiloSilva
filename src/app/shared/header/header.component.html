@@ -2,7 +2,7 @@
   <div class="header-container">
     <!-- Logo -->
     <app-logo></app-logo>
-    
+
     <!-- Desktop Navigation (hidden on mobile) -->
     <nav class="desktop-nav">
       <ul class="nav-list">
@@ -28,33 +28,33 @@
         </li>
       </ul>
     </nav>
-    
+
     <!-- Right side controls -->
     <div class="header-controls">
       <!-- Theme toggle -->
-      <button 
-        class="theme-toggle" 
+      <button
+        class="theme-toggle"
         (click)="toggleTheme($event)"
         [attr.aria-label]="'Cambiar a tema ' + (isDarkTheme ? 'claro' : 'oscuro')"
         title="Cambiar tema">
-        <img 
-          class="theme-icon" 
+        <img
+          class="theme-icon"
           [class.dark]="isDarkTheme"
           [src]="isDarkTheme ? '/assets/images/sun.svg' : '/assets/images/moon.svg'"
           [alt]="isDarkTheme ? 'Icono de sol' : 'Icono de luna'">
       </button>
-      
+
       <!-- Menu toggle (only visible on mobile) -->
-      <app-navbar-toggle 
+      <app-navbar-toggle
         class="mobile-menu-toggle"
         [isMenuOpen]="isMenuOpen"
         (menuToggle)="toggleMenu()">
       </app-navbar-toggle>
     </div>
   </div>
-  
+
   <!-- Menu overlay -->
-  <app-menu-overlay 
+  <app-menu-overlay
     [isOpen]="isMenuOpen"
     (closeMenu)="closeMenu()">
   </app-menu-overlay>
