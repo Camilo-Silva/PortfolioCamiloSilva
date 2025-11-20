@@ -1,8 +1,21 @@
 .contact {
-  min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
-  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2); // Padding inferior doble para más espacio
   background-color: transparent;
-  position: relative; // Configuración estándar para todas las páginas
+
+  // Desktop: mantener estilos originales
+  @media (min-width: 769px) {
+    min-height: 100%;
+    padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2);
+    position: relative;
+  }
+
+  // Móvil: sin restricciones de altura, padding ajustado
+  @media (max-width: 768px) {
+    height: auto;
+    overflow: visible;
+    position: relative;
+    margin-top: 10vh;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl) 0;
+  }
 
   // Contenedor principal con max-width
   .contact-container {
@@ -168,8 +181,6 @@
 
   // Formulario de contacto
   .contact-form-section {
-    padding-bottom: var(--spacing-2xl); // Espacio extra después del formulario
-    
     h2 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
@@ -235,7 +246,7 @@
           border: 2px solid var(--border-color);
           border-radius: 8px;
           font-size: 1rem;
-          font-family: var(--font-family); 
+          font-family: var(--font-family);
           background: var(--form-contact);
           color: var(--text-primary);
           transition: all 0.3s ease;
@@ -376,46 +387,21 @@
 // Responsive para tablets
 @media (max-width: 768px) {
   .contact {
-    .contact-form-section {
-      padding-bottom: calc(var(--spacing-2xl) * 1.5); // Padding intermedio para tablets
-    }
-  }
-}
-// Responsive mejoras
-@media (max-width: 768px) {
-  :host {
-    .contact {
-      .social-links {
-        gap: 0.75rem; // Reducir gap en tablets
-      }
+    .social-links {
+      gap: 0.75rem;
     }
   }
 }
 
-// Responsive mejoras
+// Responsive para móviles
 @media (max-width: 480px) {
-  :host {
-    .contact {
-      // Aumentar padding inferior en móviles para más espacio
-      padding-bottom: calc(var(--spacing-2xl) * 3); // Triple padding en móviles
-      
-      .social-links {
-        grid-template-columns: 1fr;
-      }
+  .contact {
+    .social-links {
+      grid-template-columns: 1fr;
+    }
 
-      .contact-form-section {
-        padding-bottom: calc(var(--spacing-2xl) * 2); // Doble padding en móviles
-        
-        .contact-form {
-          padding: 1rem;
-          margin-bottom: var(--spacing-xl); // Espacio extra después del formulario en móviles
-          
-          // Espacio extra para el botón en móviles
-          .btn.btn-primary {
-            margin-bottom: var(--spacing-lg); // Espacio extra debajo del botón
-          }
-        }
-      }
+    .contact-form {
+      padding: 1rem;
     }
   }
 }

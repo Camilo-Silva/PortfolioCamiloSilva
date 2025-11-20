@@ -1,8 +1,21 @@
 .about {
-  min-height: 100%; // Usa mínimo el 100% del 80vh disponible, puede expandirse
-  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2); // Padding inferior doble para más espacio
   background-color: transparent;
-  position: relative; // Configuración estándar para todas las páginas
+
+  // Desktop: mantener estilos originales
+  @media (min-width: 769px) {
+    min-height: 100%;
+    padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) * 2);
+    position: relative;
+  }
+
+  // Móvil: sin restricciones de altura, padding ajustado
+  @media (max-width: 768px) {
+    height: auto;
+    overflow: visible;
+    position: relative;
+    margin-top: 10vh;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl) 0;
+  }
 
   // Contenedor principal con max-width
   .about-container {
@@ -144,7 +157,7 @@
           background: transparent;
           cursor: pointer;
           transition: all 0.3s ease;
-          
+
           &:hover {
             transform: translateY(-2px) scale(1.02);
             filter: drop-shadow(0 8px 25px rgba(var(--primary-rgb), 0.3));

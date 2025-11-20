@@ -95,8 +95,18 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden; // Ocultar cualquier scroll del html
   height: 100%;
+
+  // En móviles: permitir overflow para pull-to-refresh
+  @media (max-width: 768px) {
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+  }
+
+  // En desktop: mantener overflow hidden
+  @media (min-width: 769px) {
+    overflow: hidden;
+  }
 }
 
 body {
@@ -109,6 +119,7 @@ body {
   background-color: var(--background-color, var(--primary-bg)); // Usar --background-color si existe, sino --primary-bg
   color: var(--text-primary);
   position: relative;
+  min-height: 100vh;
 
   // 🎯 TECH NOISE TEXTURE OVERLAY
   &::before {
@@ -128,9 +139,20 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  height: 100vh; // Altura fija del viewport
-  overflow: hidden; // Ocultar cualquier scroll del body
   transition: background-image var(--transition-base), background-color var(--transition-base), color var(--transition-base);
+
+  // En móviles: permitir scroll para pull-to-refresh
+  @media (max-width: 768px) {
+    overflow-y: auto;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // En desktop: mantener overflow hidden con altura fija
+  @media (min-width: 769px) {
+    height: 100vh;
+    overflow: hidden;
+  }
 }
 
 // Typography
@@ -255,8 +277,19 @@ a {
 // Contenedor principal de Angular sin scroll
 app-root {
   display: block;
-  height: 100vh;
-  overflow: hidden;
+
+  // Desktop: altura fija y sin scroll
+  @media (min-width: 769px) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // Móvil: altura automática para permitir scroll del body
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
 }
 
 app-home,
@@ -268,67 +301,89 @@ app-contact {
   padding: 0;
   box-sizing: border-box;
   position: relative;
-  height: 100vh; // Altura fija del viewport
-  overflow: hidden; // Ocultar el scroll principal
-  max-width:  1500px; // Ancho máximo para mantener el contenido centrado
+  max-width: 1500px; // Ancho máximo para mantener el contenido centrado
 
+  // Desktop: altura fija y sin scroll
+  @media (min-width: 769px) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // Móvil: altura automática para permitir scroll del body
+  @media (max-width: 768px) {
+    height: auto;
+    overflow: visible;
+    position: static;
+  }
 }
 
 // Configuración estándar para todos los contenedores principales con scroll interno
 
 // Home también usa el sistema 90/10 pero mantiene su centrado especial
 .home {
-  height: 90vh; // 90% del viewport para las páginas
-  overflow-y: auto; // Scroll interno en el eje Y
-  overflow-x: hidden; // Sin scroll horizontal
-  padding: 0; // Sin padding (configurado en su componente)
   background-color: transparent;
-  position: absolute; // Posicionamiento absoluto
-  top: 10vh; // Comienza al 10% del viewport (después del header)
   left: 0;
   right: 0;
   margin: 0;
   box-sizing: border-box;
 
-  // Ocultar la barra de scroll pero mantener funcionalidad
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // Internet Explorer 10+
+  // Desktop: scroll interno
+  @media (min-width: 769px) {
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 10vh;
+    padding: 0;
 
-  &::-webkit-scrollbar {
-    display: none; // Chrome, Safari, Opera
+    // Ocultar la barra de scroll pero mantener funcionalidad
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
+
+  // Móvil: Los component.scss manejan sus propios estilos móviles
+  // para evitar conflictos de especificidad con Angular encapsulation
 }
 
 // Otras páginas empiezan al 10% del viewport y pueden hacer scroll completo hasta el final
 .about,
 .projects,
 .contact {
-  height: calc(100vh - 10vh); // Altura exacta desde 10vh hasta 100vh
-  overflow-y: auto; // Scroll interno en el eje Y
-  overflow-x: hidden; // Sin scroll horizontal
-  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-2xl) var(--spacing-lg); // Padding normal
   background-color: transparent;
-  position: absolute; // Posicionamiento absoluto
-  top: 10vh; // Comienzan al 10% del viewport (después del header)
   left: 0;
   right: 0;
   margin: 0;
   box-sizing: border-box;
 
-  // El contenedor interno puede expandirse libremente
-  > .container {
-    height: auto; // Altura automática según contenido real
-    min-height: 100%; // Mínimo el 100% del área visible
-    padding-bottom: var(--spacing-2xl); // Extra padding inferior para asegurar visibilidad del final
+  // Desktop: scroll interno
+  @media (min-width: 769px) {
+    height: calc(100vh - 10vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 10vh;
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-2xl) var(--spacing-lg);
+
+    // El contenedor interno puede expandirse libremente
+    > .container {
+      height: auto;
+      min-height: 100%;
+      padding-bottom: var(--spacing-2xl);
+    }
+
+    // Ocultar la barra de scroll pero mantener funcionalidad
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
-  // Ocultar la barra de scroll pero mantener funcionalidad
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // Internet Explorer 10+
-
-  &::-webkit-scrollbar {
-    display: none; // Chrome, Safari, Opera
-  }
+  // Móvil: Los component.scss manejan sus propios estilos móviles
+  // para evitar conflictos de especificidad con Angular encapsulation
 }
 
 // Responsive breakpoints

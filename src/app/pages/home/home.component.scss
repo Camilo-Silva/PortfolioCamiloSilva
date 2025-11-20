@@ -1,12 +1,20 @@
 .home {
-  // Usar el sistema de scroll interno oculto como las otras páginas
-  // pero con contenido centrado
-  padding: 0; // Sin padding superior e inferior para centrado perfecto
   display: flex;
   flex-direction: column;
-  
-  // Todas las reglas están definidas en styles.scss globalmente
-  // No necesitamos sobrescribir aquí para evitar conflictos
+
+  // Desktop: sin padding para centrado perfecto
+  @media (min-width: 769px) {
+    padding: 0;
+  }
+
+  // Móvil: sin restricciones pero con padding vertical
+  @media (max-width: 768px) {
+    height: auto;
+    overflow: visible;
+    position: relative;
+    margin-top: 10vh;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl) 0;
+  }
 
   // Contenedor principal con max-width
   .home-container {
@@ -29,14 +37,23 @@
 
   .home-content {
     text-align: center;
-    margin-bottom: 0; // Sin margin para mantener centrado
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1; // Ocupa todo el espacio disponible
-    min-height: 90vh; // Altura mínima del espacio disponible (90vh)
-    padding: var(--spacing-lg); // Padding uniforme
+    flex: 1;
+    padding: var(--spacing-lg);
+
+    // Desktop: altura mínima 90vh
+    @media (min-width: 769px) {
+      min-height: 90vh;
+    }
+
+    // Móvil: altura automática
+    @media (max-width: 768px) {
+      min-height: auto;
+    }
   }
 
   .home-title {
@@ -50,18 +67,18 @@
     letter-spacing: 2px;
     text-align: center;
     width: 100%;
-    
+
     .highlight {
       background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       position: relative;
-      
+
       &.typewriter-text {
         display: inline-flex;
         align-items: baseline; /* Cambiado de center a baseline para mejor alineación */
-        
+
         .typewriter-container {
           white-space: pre;
           overflow: hidden;
@@ -70,7 +87,7 @@
           display: inline-block; /* Asegurar que se comporte como texto inline */
           line-height: normal; /* Normalizar la línea */
         }
-        
+
         .cursor {
           display: inline-block;
           margin-left: 2px;
@@ -86,7 +103,7 @@
         }
       }
     }
-    
+
     @keyframes cursor-blink {
       0%, 100% {
         opacity: 1;
@@ -120,7 +137,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
-      
+
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);

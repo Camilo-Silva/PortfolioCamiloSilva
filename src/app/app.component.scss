@@ -1,13 +1,31 @@
 :host {
   display: block;
-  height: 100vh; // Altura fija en lugar de min-height
-  overflow: hidden; // Sin scroll en el host
+
+  // Desktop: altura fija sin scroll
+  @media (min-width: 769px) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // Móvil: altura automática para scroll del body
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
 }
 
 .main-content {
-  height: 100vh; // Altura fija
-  overflow: hidden; // Sin scroll en main-content
-  padding-top: 0; // Sin padding superior
-  
-  // El header será posicionado como overlay, no necesitamos padding
+  // Desktop: altura fija sin scroll
+  @media (min-width: 769px) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // Móvil: altura automática para scroll del body
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
 }
