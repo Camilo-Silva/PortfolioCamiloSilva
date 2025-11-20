@@ -27,6 +27,32 @@
   .projects-header {
     text-align: center;
     margin-bottom: var(--spacing-2xl);
+    position: relative;
+    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Líneas decorativas animadas
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+      animation: expandWidth 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+    }
+
+    &::before {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+    }
+
+    &::after {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+    }
 
     .section-title {
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -36,6 +62,20 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+      display: inline-block;
+
+      // Efecto de brillo al aparecer
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--shimmer-color), transparent);
+        animation: shimmer 3s ease-in-out 0.5s infinite;
+      }
     }
 
     .section-description {
@@ -44,6 +84,7 @@
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.6;
+      animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
     }
   }
 
@@ -52,15 +93,57 @@
     justify-content: center;
     align-items: start;
     width: 100%;
-    padding: 0 var(--spacing-lg); // Padding interno para no tocar los bordes
+    padding: 0 var(--spacing-lg);
     box-sizing: border-box;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 
     .projects-list {
       position: relative;
       width: 100%;
-      max-width: 1200px; // Limitar ancho máximo para mejor centrado
-      padding-bottom: var(--spacing-2xl); // Espacio adicional después del último proyecto
+      max-width: 1200px;
+      padding-bottom: var(--spacing-2xl);
     }
+  }
+}
+
+// Animaciones profesionales
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
   }
 }
 

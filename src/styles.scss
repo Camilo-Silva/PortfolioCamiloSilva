@@ -57,6 +57,9 @@
   // --background-image: url('/assets/images/FondoLight.png');
   --background-image: none;
   --background-color: #E9E9E9; // Color de fondo para tema claro
+
+  // Shimmer effect colors
+  --shimmer-color: rgba(0, 0, 0, 0.2); // Color oscuro para tema claro
 }
 
 // Dark theme
@@ -82,6 +85,9 @@
   // --background-image: url('/assets/images/FondoDark.png');
   --background-image: none;
   --background-color: #1D2633;
+
+  // Shimmer effect colors
+  --shimmer-color: rgba(255, 255, 255, 0.3); // Color claro para tema oscuro
 }
 
 
