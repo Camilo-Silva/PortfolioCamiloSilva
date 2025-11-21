@@ -499,18 +499,27 @@
 }
 
 // Animaciones profesionales adicionales
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
+@keyframes titlePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px var(--accent-color));
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    filter: drop-shadow(0 0 25px var(--accent-color)) drop-shadow(0 0 35px var(--accent-color));
   }
 }
 
-@keyframes fadeInUp {
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
   from {
     opacity: 0;
     transform: translateY(30px);

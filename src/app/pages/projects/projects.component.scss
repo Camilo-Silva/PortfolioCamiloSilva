@@ -107,6 +107,24 @@
 }
 
 // Animaciones profesionales
+@keyframes titlePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px var(--accent-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px var(--accent-color)) drop-shadow(0 0 35px var(--accent-color));
+  }
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px var(--accent-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px var(--accent-color)) drop-shadow(0 0 35px var(--accent-color));
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;

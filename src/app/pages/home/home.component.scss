@@ -78,6 +78,8 @@
       background-clip: text;
       position: relative;
       display: inline-block;
+      filter: drop-shadow(0 0 3px var(--accent-color));
+      animation: neonPulse 4s ease-in-out infinite;
 
       // Efecto de brillo animado
       &::after {
@@ -160,6 +162,8 @@
       position: relative;
       overflow: hidden;
       z-index: 2;
+      box-shadow: 0 0 25px rgba(74, 158, 255, 0.4), 0 0 50px rgba(74, 158, 255, 0.2);
+      animation: buttonGlow 2.5s ease-in-out infinite;
 
       // Efecto de onda al hacer hover
       &::before {
@@ -176,8 +180,9 @@
       }
 
       &:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        transform: translateY(-3px) scale(0.05);
+        box-shadow: 0 0 15px rgba(74, 158, 255, 0.7), 0 0 30px rgba(74, 158, 255, 0.4), 0 12px 10px rgba(0, 0, 0, 0.2);
+        animation: none;
 
         &::before {
           width: 300px;
@@ -390,6 +395,24 @@
 }
 
 // Animaciones profesionales
+@keyframes neonPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px var(--accent-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px var(--accent-color));
+  }
+}
+
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(74, 158, 255, 0.4), 0 0 50px rgba(74, 158, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(74, 158, 255, 0.6), 0 0 70px rgba(74, 158, 255, 0.4);
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
