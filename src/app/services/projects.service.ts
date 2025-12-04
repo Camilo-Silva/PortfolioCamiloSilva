@@ -5,7 +5,7 @@ export interface Project {
   id: string;
   nombre: string;
   descripcion: string;
-  descripcionCorta: string; 
+  descripcionCorta: string;
   videos?: string[]; // URLs de videos (Google Drive, YouTube, etc.)
   imagenes: string[];
   tecnologias: string[];
@@ -28,7 +28,7 @@ export class ProjectsService {
   convertGoogleDriveUrl(url: string): string {
     // Limpiar parámetros adicionales de la URL
     const cleanUrl = url.split('?')[0];
-    
+
     // Convertir de https://drive.google.com/file/d/ID/view a formato embebido
     const match = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
     if (match) {
@@ -42,6 +42,24 @@ export class ProjectsService {
     return [
       {
         id: '1',
+        nombre: 'Sublisa',
+        descripcion: 'Tienda online especializada en el rubro de la sublimación. Ofrece una amplia gama de productos que incluyen artículos sublimables e insumos para profesionales, así como opciones de artículos personalizados y tecnología DTF. El proyecto está diseñado para que los usuarios puedan explorar fácilmente el catálogo, visualizar los productos y agregar los elementos deseados a un carrito de compras para finalizar su pedido de manera eficiente.',
+        descripcionCorta: 'Tienda online especializada en sublimación que vende artículos sublimables, insumos para profesionales y productos personalizados (DTF), con carrito de compras para finalizar pedidos.',
+        videos: [
+          'https://drive.google.com/file/d/1idfxgHcMyvl4N39SzQHFHHNH3RovnNmr/view?usp=sharing'
+        ],
+        imagenes: [
+          '/assets/images/project5-1.jpg',
+          '/assets/images/project5-2.jpg',
+          '/assets/images/project5-3.jpg'
+        ],
+        tecnologias: ['Angular', 'JavaScript', 'HTML5', 'CSS3', 'TypeScript', 'API REST', 'Supabase', 'PostgreSQL'],
+        githubUrl: 'https://github.com/Camilo-Silva/Sublisa.git',
+        hostedUrl: 'https://sublisa.netlify.app/',
+        thumbnailUrl: '/assets/images/project5.png'
+      },
+      {
+        id: '2',
         nombre: 'Way Combat',
         descripcion: 'Desarrollada como una plataforma web robusta para el fitness de combate. El backend fue implementado con ASP.NET Core, manejando eficientemente el registro de usuarios y la distribución de los mixes de entrenamiento. El frontend, creado con Angular, proporciona una experiencia de usuario fluida y reactiva para navegar y disfrutar de las rutinas.',
         descripcionCorta: 'Aplicación web de fitness de combate, donde usuarios pueden adquirir una variedad de mixes de entrenamiento.',
@@ -59,7 +77,7 @@ export class ProjectsService {
         thumbnailUrl: '/assets/images/project4.png'
       },
       {
-        id: '2',
+        id: '3',
         nombre: 'Spotify Clon',
         descripcion: 'Este proyecto es un clon de Spotify desarrollado con Angular 17.3, que implementa un reproductor de música, gestión de usuarios, historial, favoritos y navegación modular. El objetivo es practicar arquitectura escalable, buenas prácticas y el uso de Angular moderno (standalone components, directivas y pipes. Integración con API deployada en https://api-reproductormusica-production.up.railway.app/ ).',
         descripcionCorta: 'Clon de Spotify con Angular 17.3. Reproductor de música con gestión de usuarios, favoritos e historial.',
@@ -77,7 +95,7 @@ export class ProjectsService {
         thumbnailUrl: '/assets/images/project1.png'
       },
       {
-        id: '3',
+        id: '4',
         nombre: 'App de Gestión de Turnos',
         descripcion: 'es un sistema integral de gestión de turnos médicos desarrollado con ASP.NET Core 8.0 MVC. La aplicación facilita la administración de citas médicas, permitiendo la gestión de pacientes, médicos, especialidades, turnos y historiales médicos de manera eficiente y centralizada.',
         descripcionCorta: 'Sistema de gestión de turnos médicos con ASP.NET Core. Administración completa de citas y pacientes.',
@@ -96,7 +114,7 @@ export class ProjectsService {
         hasFlowDetails: true // Este proyecto tiene detalles de flujo de app
       },
       {
-        id: '4',
+        id: '5',
         nombre: 'Calculadora Python',
         descripcion: 'Una calculadora web moderna y funcional desarrollada con Python Flask que incluye: Calculadora Básica: Operaciones aritméticas fundamentales - Calculadora Científica: Funciones matemáticas avanzadas - Operaciones con Listas: Cálculos con múltiples números - Interfaz Moderna: Diseño responsivo y atractivo - Historial: Registro de todos los cálculos realizados - Soporte de Teclado: Navega usando el teclado',
         descripcionCorta: 'Calculadora web moderna con Python Flask. Funciones básicas, científicas y historial de cálculos.',
@@ -112,7 +130,7 @@ export class ProjectsService {
         githubUrl: 'https://github.com/Camilo-Silva/CalculadoraPython.git',
         hostedUrl: 'https://calculadorapython-production.up.railway.app/',
         thumbnailUrl: '/assets/images/project3.png'
-      }      
+      }
 
     ];
   }
@@ -141,7 +159,7 @@ export class ProjectsService {
   updateProject(id: string, updatedProject: Partial<Project>): void {
     const currentProjects = this.projectsSubject.value;
     const index = currentProjects.findIndex(p => p.id === id);
-    
+
     if (index !== -1) {
       currentProjects[index] = { ...currentProjects[index], ...updatedProject };
       this.projectsSubject.next([...currentProjects]);
