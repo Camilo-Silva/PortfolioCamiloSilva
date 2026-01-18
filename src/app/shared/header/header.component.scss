@@ -5,8 +5,8 @@
   right: 0;
   z-index: 9999;
   background-color: transparent;
-  border-bottom: none;
-  backdrop-filter: none;
+  border-bottom: 1px solid var(--card-border-color);
+  backdrop-filter: var(--card-backdrop-blur);
   transition: all var(--transition-base);
 
   // Crear una zona de máscara para ocultar contenido que pase por debajo
@@ -17,11 +17,8 @@
     left: 0;
     right: 0;
     height: var(--header-height); // Usar la variable CSS
-    background: var(--background-color, var(--primary-bg)); // Usar --background-color si existe, sino --primary-bg
-    background-image: var(--background-image);
-    background-size: 100% 100%;
-    background-position: center;
-    background-attachment: fixed;
+    background: var(--card-bg-overlay); // Usar la variable de cards
+    box-shadow: var(--card-shadow);
     z-index: -1;
     pointer-events: none;
   }

@@ -10,8 +10,8 @@
   --secondary-bg: #f8f9fa;
   --background-secondary: #f0f0f0;
   --card-background: transparent;
-  --text-primary: #333333;
-  --text-secondary: #666666;
+  --text-primary: #1a1a1a; // Más oscuro para mejor contraste
+  --text-secondary: #404040; // Más oscuro para mejor legibilidad
   --accent-color: #ff8a00;
   --accent-hover: #ff8a00;
   --border-color: #e0e0e0;
@@ -60,6 +60,16 @@
 
   // Shimmer effect colors
   --shimmer-color: rgba(0, 0, 0, 0.2); // Color oscuro para tema claro
+
+  // Card backgrounds para video de fondo
+  --card-bg-overlay: rgba(255, 255, 255, 0.65); // Más transparente para ver el video
+  --card-border-color: rgba(255, 140, 0, 0.4); // Borde con accent color
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+  --card-backdrop-blur: blur(20px);
+  
+  // Form inputs con glassmorphism
+  --input-bg: rgba(255, 255, 255, 0.7);
+  --input-border: rgba(255, 140, 0, 0.3);
 }
 
 // Dark theme
@@ -88,6 +98,16 @@
 
   // Shimmer effect colors
   --shimmer-color: rgba(255, 255, 255, 0.3); // Color claro para tema oscuro
+
+  // Card backgrounds para video de fondo
+  --card-bg-overlay: rgba(0, 0, 0, 0.75); // Fondo oscuro semi-transparente
+  --card-border-color: rgba(74, 158, 255, 0.3); // Borde con accent color
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --card-backdrop-blur: blur(20px);
+  
+  // Form inputs con glassmorphism
+  --input-bg: rgba(45, 61, 112, 0.6);
+  --input-border: rgba(74, 158, 255, 0.3);
 }
 
 
@@ -115,6 +135,36 @@ html {
   }
 }
 
+// 🎥 VIDEO DE FONDO GLOBAL
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+  pointer-events: none;
+}
+
+// Overlay oscuro sobre el video para mejorar legibilidad
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: -2;
+  pointer-events: none;
+}
+
 body {
   font-family: var(--font-family);
   background-image: var(--background-image);
@@ -122,12 +172,13 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: var(--background-color, var(--primary-bg)); // Usar --background-color si existe, sino --primary-bg
+  background-color: transparent; // Transparente para mostrar el video de fondo
   color: var(--text-primary);
   position: relative;
   min-height: 100vh;
 
-  // 🎯 TECH NOISE TEXTURE OVERLAY
+
+  // 🎯 TECH NOISE TEXTURE OVERLAY (desactivado para no competir con video)
   &::before {
     content: '';
     position: fixed;
@@ -138,8 +189,8 @@ body {
     background:
       radial-gradient(circle at 1px 1px, var(--bg-noise-color) 1px, transparent 0);
     background-size: 20px 20px;
-    opacity: var(--bg-noise-opacity);
-    z-index: 0;
+    opacity: 0; // Desactivado temporalmente
+    z-index: -1;
     pointer-events: none;
   }
   line-height: 1.6;
@@ -166,10 +217,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: var(--spacing-md);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0, 0, 0, 0.6); // Sombra fuerte
 }
 
 h1 {
   font-size: var(--font-size-4xl);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 8px 24px rgba(0, 0, 0, 0.7);
 }
 
 h2 {
@@ -187,6 +240,7 @@ h4 {
 p {
   margin-bottom: var(--spacing-md);
   color: var(--text-secondary);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); // Sombra para párrafos
 }
 
 // Links
@@ -283,6 +337,8 @@ a {
 // Contenedor principal de Angular sin scroll
 app-root {
   display: block;
+  position: relative;
+  z-index: 1; // Asegurar que el contenido esté sobre el video de fondo
 
   // Desktop: altura fija y sin scroll
   @media (min-width: 769px) {

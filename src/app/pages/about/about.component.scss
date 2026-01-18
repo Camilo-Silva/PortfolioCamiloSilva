@@ -144,16 +144,17 @@
     }
 
     .profile-info {
-      background: var(--card-background);
+      background: var(--card-bg-overlay);
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--card-shadow);
       justify-self: stretch;
       width: 100%;
       animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      backdrop-filter: var(--card-backdrop-blur);
 
       // Efecto de borde brillante en hover
       &::before {
@@ -201,16 +202,17 @@
     }
 
     .cv-section {
-      background: var(--card-background);
+      background: var(--card-bg-overlay);
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--card-shadow);
       justify-self: stretch;
       width: 100%;
       animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      backdrop-filter: var(--card-backdrop-blur);
 
       &::before {
         content: '';
@@ -480,8 +482,8 @@
       }
 
       .soft-skill-item {
-        background: var(--card-background);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg-overlay);
+        border: 1px solid var(--card-border-color);
         padding: var(--spacing-xl) var(--spacing-lg);
         border-radius: 12px;
         text-align: center;
@@ -489,6 +491,8 @@
         position: relative;
         overflow: hidden;
         animation: fadeInUp 0.6s ease-out both;
+        backdrop-filter: var(--card-backdrop-blur);
+        box-shadow: var(--card-shadow);
 
         .skill-icon {
           width: 64px;
@@ -545,7 +549,7 @@
 
         &:hover {
           transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 12px 32px rgba(74, 158, 255, 0.2), 0 8px 16px rgba(0, 0, 0, 0.6);
 
           &::before {
             opacity: 1;

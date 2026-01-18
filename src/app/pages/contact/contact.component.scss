@@ -105,6 +105,17 @@
 
   // Información de contacto
   .contact-info {
+    background: var(--card-bg-overlay);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: var(--card-backdrop-blur);
+    border: 1px solid var(--card-border-color);
+
+    @media (max-width: 968px) {
+      padding: 1.5rem;
+    }
+
     h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
@@ -263,10 +274,19 @@
     h2 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
-      color: var(--primary-color);
+      color: var(--text-primary);
+      background: var(--card-bg-overlay);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: var(--card-backdrop-blur);
+      border: 1px solid var(--card-border-color);
+      box-shadow: var(--card-shadow);
+      display: inline-block;
+      font-weight: 600;
 
       @media (max-width: 768px) {
         font-size: 1.5rem;
+        padding: 0.75rem 1.25rem;
       }
     }
 
@@ -289,10 +309,11 @@
     }
 
     .contact-form {
-      background: var(--card-background);
+      background: var(--card-bg-overlay);
       padding: 0rem;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--card-shadow);
+      backdrop-filter: var(--card-backdrop-blur);
 
       @media (max-width: 768px) {
         padding: 1.5rem;
@@ -323,14 +344,15 @@
         textarea {
           width: 100%;
           padding: 0.75rem 1rem;
-          border: 2px solid var(--border-color);
+          border: 2px solid var(--input-border);
           border-radius: 8px;
           font-size: 1rem;
           font-family: var(--font-family);
-          background: var(--form-contact);
+          background: var(--input-bg);
           color: var(--text-primary);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
+          backdrop-filter: blur(10px);
 
           &:focus {
             outline: none;

@@ -70,6 +70,15 @@
     animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 2;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0, 0, 0, 0.6);
+    background: var(--card-bg-overlay);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: 12px;
+    backdrop-filter: var(--card-backdrop-blur);
+    border: 1px solid var(--card-border-color);
+    box-shadow: var(--card-shadow);
+    display: inline-block;
+    max-width: 90%;
 
     .highlight {
       background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
@@ -78,8 +87,9 @@
       background-clip: text;
       position: relative;
       display: inline-block;
-      filter: drop-shadow(0 0 3px var(--accent-color));
+      filter: drop-shadow(0 0 8px var(--accent-color)) drop-shadow(0 0 15px var(--accent-color));
       animation: neonPulse 4s ease-in-out infinite;
+      text-shadow: none; // Remover sombra del texto para que el gradiente se vea nítido
 
       // Efecto de brillo animado
       &::after {
@@ -143,6 +153,14 @@
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
     z-index: 2;
     position: relative;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    background: var(--card-bg-overlay);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 8px;
+    backdrop-filter: var(--card-backdrop-blur);
+    border: 1px solid var(--card-border-color);
+    box-shadow: var(--card-shadow);
+    display: inline-block;
   }
 
   .home-actions {
