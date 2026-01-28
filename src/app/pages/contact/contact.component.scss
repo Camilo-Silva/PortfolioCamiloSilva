@@ -87,6 +87,11 @@
       margin: 0 auto;
       line-height: 1.6;
       animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+      font-weight: 500;
+      background: var(--card-bg-overlay);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: 8px;
+      backdrop-filter: var(--card-backdrop-blur);
     }
   }
 
